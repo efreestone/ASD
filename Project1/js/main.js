@@ -5,7 +5,7 @@ Project 1
 2-4-13
 */
 
-$('#home').on('pageinit', function(){
+$('#index').on('pageinit', function(){
 	//code needed for home page goes here
 });	
 		

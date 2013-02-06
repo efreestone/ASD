@@ -4,7 +4,6 @@
 	<!--Project 1 -->
 	<!--2-4-13 -->
 
-
 <html lang="en">
 	<head>
 	
@@ -21,22 +20,95 @@
 		<meta http-equiv="cleartype" content="on">
 		
 		<!-- StyleSheets under here -->
-		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
-		<link rel="stylesheet" href="css/indexStyles.css" type="text/css" />
+		<link rel="stylesheet" href="css/jquery.mobile-1.2.0.css" />
+		<link rel="stylesheet" href="css/styles.css" type="text/css" />
 		
 		<!-- JavaScript is normally at the end of the body, except for Modernizr which enables HTML5 elements & feature detects -->
 		<script src="js/libs/modernizr.custom.min.js"></script>
 	
 	</head>
 	<body>
+	<!-- Start of index -->
+		<section data-role="page" id="index">
+			<a href="#addItem" Data-ajax="false"><img src="img/Logo1.jpg" data-id="feature"></img></a>
+			
+			
+		
+			<section data-role="footer" data-position="fixed" data-id="index" data-theme="a">
+				<section data-role="navbar" >
+					<ul>
+						<li><a href="http://efreestone.github.com/MiU/Project4/Bronze/" Data-ajax="false">Bronze App</a></li>
+						<li><a href="index.html" Data-ajax="false">Home</a></li>
+						<li><a href="#error404" Data-ajax="false">Search</a></li>
+					</ul>
+				</section>
+			</section>
+		</section>
+	<!-- End of index -->
 	
+	<!-- Start of addItem -->
+		<section data-role="page" id="addItem">
+			<h1><img src="img/Logo.jpg"></img></h1>
+		
+		
+		
+			<section data-role="footer" data-position="fixed" data-id="index" data-theme="a">
+				<section data-role="navbar" >
+					<ul>
+						<li><a href="http://efreestone.github.com/MiU/Project4/Bronze/" Data-ajax="false">Bronze App</a></li>
+						<li><a href="index.html" Data-ajax="false">Home</a></li>
+						<li><a href="#error404" Data-ajax="false">Search</a></li>
+					</ul>
+				</section>
+			</section>
+		</section>
+	<!-- End of addItem -->
+	
+	<!-- Start of dispData -->
+		<section data-role="page" id="dispData">
+			<h1><img src="img/Logo.jpg"></img></h1>
+		
+		
+		
+			<section data-role="footer" data-position="fixed" data-id="index" data-theme="a">
+				<section data-role="navbar" >
+					<ul>
+						<li><a href="http://efreestone.github.com/MiU/Project4/Bronze/" Data-ajax="false">Bronze App</a></li>
+						<li><a href="index.html" Data-ajax="false">Home</a></li>
+						<li><a href="#error404" Data-ajax="false">Search</a></li>
+					</ul>
+				</section>
+			</section>
+		</section>
+	<!-- End of dispData -->
+	
+	<!-- Start of error404 -->
+		<section data-role="page" id="error404">
+			<h1><img src="img/Logo.jpg"></img></h1>
+				<h2><img src="img/Error.jpg"></img></h2>
+					<h3 id="errorMsg">We're sorry. You appear to have found a page that is under construction or no longer exists.</h3>
+			<nav>
+				<a href="#index" id="home">Click here to return home</a>
+			</nav>
+			<section data-role="footer" data-position="fixed" data-id="index" data-theme="a">
+				<section data-role="navbar" >
+					<ul>
+						<li><a href="http://efreestone.github.com/MiU/Project4/Bronze/" Data-ajax="false">Bronze App</a></li>
+						<li><a href="index.html" Data-ajax="false">Home</a></li>
+						<li><a href="#error404" Data-ajax="false">Search</a></li>
+					</ul>
+				</section>
+			</section>
+		</section>
+	<!-- End of error404 -->
 	
 	
 	
 	
 	<!-- JavaScript under here -->
-	<script type="text/javascript" src="js/libs/jquery-1.9.1.js"></script>
-	<script type="text/javascript" src="js/libs/jquery.mobile-1.2.0.js"></script>
+	<!-- <script type="text/javascript" src="js/libs/jquery-1.9.1.js"></script> -->
+	<script type="text/javascript" src="js/libs/jquery-1.8.3.js"></script>
+	<script type="text/javascript" src="js/libs/jquery.mobile-1.2.0.js"></script> 
 	<script type="text/javascript" src="js/libs/jquery.validate.min.js"></script>
 	<script type="text/javascript" src="js/json.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
