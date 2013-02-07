@@ -84,8 +84,6 @@ $("#loadXML").on("click", function() {
 		dataType: "xml",
 		success: function(data) {
 			alert("Here's XML!");
-				/*for (var i=0, j=data.dates.length; i<j; i++){
-					var myJSON = data.dates[i];*/
 				$(data).find("dates").each(function(){
 					var events = $(this).contents("events").text();
 						evdate = $(this).contents("evdate").text();
