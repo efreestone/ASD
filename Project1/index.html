@@ -30,14 +30,21 @@
 	<body>
 	<!-- Start of index -->
 		<section data-role="page" id="index">
-			<a href="#addItem" Data-ajax="false"><img src="img/Logo1.jpg" data-id="feature"></img></a>
+			<!-- Entire img is link to additem -->
+			<a href="#addItem" Data-ajax="false" id="feature"><img src="img/Logo1.jpg" data-id="feature"></img></a></br>
 			
+			<nav>
+				<a href="#dispData" id="seeSaved" Data-ajax="false">See Saved Dates</a>
+			</nav></br>
 			
+			<nav>
+				<a href="#dispData" id="loadJSON">Load JSON Data</a>
+			</nav>
 		
 			<section data-role="footer" data-position="fixed" data-id="index" data-theme="a">
 				<section data-role="navbar" >
 					<ul>
-						<li><a href="http://efreestone.github.com/MiU/Project4/Bronze/" Data-ajax="false">Bronze App</a></li>
+						<li><a href="http://efreestone.github.com/MiU/Project4/Bronze/" Data-ajax="false">Load XML Data</a></li>
 						<li><a href="index.html" Data-ajax="false">Home</a></li>
 						<li><a href="#error404" Data-ajax="false">Search</a></li>
 					</ul>
@@ -49,13 +56,77 @@
 	<!-- Start of addItem -->
 		<section data-role="page" id="addItem">
 			<h1><img src="img/Logo.jpg"></img></h1>
+			<form action="#" method="post" id="eventForm"/>
+				<fieldset id="inputTop" data-role="none">
+				<legend>Event Info</legend>
+				<span id="notice">* fields are required.</span>
+				<ul id="errors"></ul>
+				<ul data-role="content">
+		<!-- Type of Event -->
+					<li><label for="eventType">*Type of Event:</label>
+						<select name="eventType" id="eventType"  class="required" data-role="none">
+							<option value="" data-placeholder="true">--Choose An Event Type--</option>
+							<option value="Anniversary">Anniversary</option>
+							<option value="Appointment">Appointment</option>
+							<option value="Birthday">Birthday</option>
+							<option value="Meeting">Meeting</option>
+							<option value="Other">Other</option>
+						</select>
+					</li>
+		<!-- Date of Event -->
+					<li><label for="evDate">*Event Date:</label>
+						<input type="date" name="evDate" id="evDate" value="" class="required" data-role="none"/>
+					</li>
+		<!-- Event Description -->
+					<li><label for="evInfo">*Event Information:</label>
+						<input type="text" name="evInfo" id="evInfo" value="" placeholder="Dads birthday, etc." class="required" data-role="none"/>
+					</li>
+		<!-- Importance of Event Slider -->
+					<li><label for="importance">Event Importance:</label>
+						<input type="range" name="importance" id="importance" value="3" min="1" max="5" data-track-theme="c" data-mini="true"/>	
+		<!-- Attendance required?  -->
+		
+					<li>Is Attendance Required?
+						<ul class="checkbox">
+							<li><input type="radio" value="Yes" id="Yes" name="attend" data-role="none"/>
+								<label for="Yes">Yes</label></li>
+							<li><input type="radio" value="No" id="No" name="attend" data-role="none"/>
+								<label for="No">No</label></li>
+							<li><input type="radio" value="Undecided" id="Undecided" name="attend" checked="checked" data-role="none"/>
+								<label for="Undecided">Undecided</label></li>
+						</ul>
+					</li>
+				</ul>				
+				</fieldset>
+				<fieldset id="inputBottom" data-role="none">
+					<legend>Event Details</legend>
+		<!-- Event Details (ie location of party etc) -->
+					<label for="details"></label><textarea data-role="none" id="details" placeholder="Party Location, Contact Info, etc."></textarea>
+		<!-- Hidden Input -->	
+					<input type="hidden" value="true"/>
+				</fieldset>
+		<!-- Submit Button -->	
+				<input type="submit" value="Save Date!" id="submit" data-role="none" Data-ajax="false"/>
+		<!-- Reset Form Button -->
+				<input type="reset" value="Reset Form" id="reset" data-icon="delete" data-mini="true" data-inline="true" data-role="none"/>
+				
+				<a href="#formErrors" id="popErrors" data-rel="dialog" data-transition="pop">Open Errors</a>
+			</form>
+			<nav>
+		<!-- Clear Stored Data Link -->
+				<a href="#" id="clearData" data-role="none" Data-ajax="false">Clear Local Data</a> 
+		<!-- Display Data Link -->
+				<a href="#" id="displayData" data-role="none" Data-ajax="false">Display Data</a>
+		<!-- Add New Date Link -->
+				<a href="#addItem" id="addNew" style="display:none;" data-role="none" Data-ajax="false">Add New Date</a>
+			</nav>
 		
 		
 		
 			<section data-role="footer" data-position="fixed" data-id="index" data-theme="a">
 				<section data-role="navbar" >
 					<ul>
-						<li><a href="http://efreestone.github.com/MiU/Project4/Bronze/" Data-ajax="false">Bronze App</a></li>
+						<li><a href="http://efreestone.github.com/MiU/Project4/Bronze/" Data-ajax="false">Load XML Data</a></li>
 						<li><a href="index.html" Data-ajax="false">Home</a></li>
 						<li><a href="#error404" Data-ajax="false">Search</a></li>
 					</ul>
@@ -66,14 +137,14 @@
 	
 	<!-- Start of dispData -->
 		<section data-role="page" id="dispData">
-			<h1><img src="img/Logo.jpg"></img></h1>
+			<a href="#index" Data-ajax="false"><img src="img/Logo.jpg" data-id="escape"></img></a>
 		
 		
 		
 			<section data-role="footer" data-position="fixed" data-id="index" data-theme="a">
 				<section data-role="navbar" >
 					<ul>
-						<li><a href="http://efreestone.github.com/MiU/Project4/Bronze/" Data-ajax="false">Bronze App</a></li>
+						<li><a href="http://efreestone.github.com/MiU/Project4/Bronze/" Data-ajax="false">Load XML Data</a></li>
 						<li><a href="index.html" Data-ajax="false">Home</a></li>
 						<li><a href="#error404" Data-ajax="false">Search</a></li>
 					</ul>
@@ -93,7 +164,7 @@
 			<section data-role="footer" data-position="fixed" data-id="index" data-theme="a">
 				<section data-role="navbar" >
 					<ul>
-						<li><a href="http://efreestone.github.com/MiU/Project4/Bronze/" Data-ajax="false">Bronze App</a></li>
+						<li><a href="http://efreestone.github.com/MiU/Project4/Bronze/" Data-ajax="false">Load XML Data</a></li>
 						<li><a href="index.html" Data-ajax="false">Home</a></li>
 						<li><a href="#error404" Data-ajax="false">Search</a></li>
 					</ul>
