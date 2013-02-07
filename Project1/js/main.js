@@ -10,21 +10,21 @@ $('#index').on('pageinit', function(){
 	$("#loadJSON").on("click", function() {
 		
 		$.ajax({
-				url: "js/data.json",
-				type: "GET",
-				dataType: "json",
-				success: function(data) {
-					alert("Here's JSON!");
-						for (var i=0, j=data.dates.length; i<j; i++){
-							var myJSON = data.dates[i];
-								$("<div>" + "<ul id='myDisp' data-role='listview'>" + 
-									"<li>" + myJSON.events + "</li>" + 
-									"<li>" + myJSON.evdate + "</li>" + 
-									"<li>" + myJSON.evinfo + "</li>" + 
-									"<li>" + myJSON.importance + "</li>" + 
-									"<li>" + myJSON.attend + "</li>" + 
-									"<li>" + myJSON.details + "</li>" + 
-									"</ul>" + "</div>").appendTo("#dispData");
+			url: "js/data.json",
+			type: "GET",
+			dataType: "json",
+			success: function(data) {
+				alert("Here's JSON!");
+					for (var i=0, j=data.dates.length; i<j; i++){
+						var myJSON = data.dates[i];
+							$("<section>" + "<ul id='myDisp' data-role='listview'>" + 
+								"<li>" + myJSON.events + "</li>" + 
+								"<li>" + myJSON.evdate + "</li>" + 
+								"<li>" + myJSON.evinfo + "</li>" + 
+								"<li>" + myJSON.importance + "</li>" + 
+								"<li>" + myJSON.attend + "</li>" + 
+								"<li>" + myJSON.details + "</li>" + 
+								"</ul>" + "</section>").appendTo("#dispData");
 				}
 			}
 		})
@@ -74,3 +74,35 @@ var	deleteItem = function (){
 var clearLocal = function(){
 
 };
+
+//Function to load XML dummy data from data.xml
+$("#loadXML").on("click", function() {
+		
+	$.ajax({
+		url: "js/data.xml",
+		type: "GET",
+		dataType: "xml",
+		success: function(data) {
+			alert("Here's XML!");
+				/*for (var i=0, j=data.dates.length; i<j; i++){
+					var myJSON = data.dates[i];*/
+				$(data).find("dates").each(function(){
+					var events = $(this).contents("events").text();
+						evdate = $(this).contents("evdate").text();
+						evinfo = $(this).contents("evinfo").text();
+						importance = $(this).contents("importance").text();
+						attend = $(this).contents("attend").text();
+						details = $(this).contents("details").text();
+										
+						$("<div>" + "<ul id='myDisp' data-role='listview'>" + 
+							"<li>" + events + "</li>" +
+							"<li>" + evdate + "</li>" +
+							"<li>" + evinfo + "</li>" +
+							"<li>" + importance + "</li>" +
+							"<li>" + attend + "</li>" +
+							"<li>" + details + "</li>" +
+							"</ul>" + "</div>").appendTo("#dispData");
+			});
+		}
+	});	
+});
