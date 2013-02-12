@@ -1,8 +1,8 @@
 <!doctype html> 
 	<!-- Elijah Freestone -->
 	<!--ASD 1302 -->
-	<!--Project 1 -->
-	<!--2-4-13 -->
+	<!--Project 2 -->
+	<!--2-8-13 -->
 
 <html lang="en">
 	<head>
@@ -31,20 +31,24 @@
 	<!-- Start of index -->
 		<section data-role="page" id="index">
 			<!-- Entire img is link to additem -->
-			<a href="#addItem" Data-ajax="false" id="feature"><img src="img/Logo1.jpg" data-id="feature"></img></a></br>
+			<a href="#addItem" Data-ajax="false" id="feature"><img src="img/Logo1.jpg" data-id="feature" alt="Feature"></img></a></br>
 			
-			<nav>
+			<div id="indexNav"><nav>
 				<a href="#dispData" id="seeSaved" Data-ajax="false">See Saved Dates</a>
-			</nav></br>
+			</nav></div></br>
 			
-			<nav>
+			<div id="indexNav"><nav>
 				<a href="#dispData" id="loadJSON">Load JSON Data</a>
-			</nav>
+			</nav></div></br>
+			
+			<div id="indexNav"><nav>
+				<a href="#dispData" id="loadXML" Data-ajax="true">Load XML Data</a>
+			</nav></div></br>
 		
 			<section data-role="footer" data-position="fixed" data-id="index" data-theme="a">
 				<section data-role="navbar">
 					<ul>
-						<li><a href="#dispData" id="loadXML" Data-ajax="true">Load XML Data</a></li>
+						<li><a href="#settings" id="settings" Data-ajax="false">Settings</a></li>
 						<li><a href="index.html" Data-ajax="false">Home</a></li>
 						<li><a href="#error404" Data-ajax="false">Search</a></li>
 					</ul>
@@ -55,7 +59,7 @@
 	
 	<!-- Start of addItem -->
 		<section data-role="page" id="addItem">
-			<h1><img src="img/Logo.jpg"></img></h1>
+			<h1><img src="img/Logo.jpg" alt="Logo"></img></h1>
 			<form action="#" method="post" id="eventForm"/>
 				<fieldset id="inputTop" data-role="none">
 				<legend>Event Info</legend>
@@ -126,7 +130,7 @@
 			<section data-role="footer" data-position="fixed" data-id="index" data-theme="a">
 				<section data-role="navbar">
 					<ul>
-						<li><a href="#dispData" id="loadXML" Data-ajax="true">Load XML Data</a></li>
+						<li><a href="#settings" id="settings" Data-ajax="false">Settings</a></li>
 						<li><a href="index.html" Data-ajax="false">Home</a></li>
 						<li><a href="#error404" Data-ajax="false">Search</a></li>
 					</ul>
@@ -137,14 +141,14 @@
 	
 	<!-- Start of dispData -->
 		<section data-role="page" id="dispData">
-			<a href="#index" Data-ajax="false"><img src="img/Logo.jpg" data-id="escape"></img></a>
+			<a href="#index" Data-ajax="false"><img src="img/Logo.jpg" data-id="escape" alt="Logo"></img></a>
 		
 		
 		
 			<section data-role="footer" data-position="fixed" data-id="index" data-theme="a">
 				<section data-role="navbar">
 					<ul>
-						<li><a href="#dispData" id="loadXML" Data-ajax="true">Load XML Data</a></li>
+						<li><a href="#settings" id="settings" Data-ajax="false">Settings</a></li>
 						<li><a href="index.html" Data-ajax="false">Home</a></li>
 						<li><a href="#error404" Data-ajax="false">Search</a></li>
 					</ul>
@@ -152,6 +156,22 @@
 			</section>
 		</section>
 	<!-- End of dispData -->
+	
+	<!-- Start of settings -->
+		<section data-role="page" id="settings">
+			<a href="#index" Data-ajax="false"><img src="img/Logo.jpg" data-id="escape" alt="Logo"></img></a>
+			
+			<section data-role="footer" data-position="fixed" data-id="index" data-theme="a">
+				<section data-role="navbar">
+					<ul>
+						<li><a href="#settings" id="settings" Data-ajax="false">Settings</a></li>
+						<li><a href="index.html" Data-ajax="false">Home</a></li>
+						<li><a href="#error404" Data-ajax="false">Search</a></li>
+					</ul>
+				</section>
+			</section>
+		</section>
+	<!-- End of settings -->
 	
 	<!-- Start of error404 -->
 		<section data-role="page" id="error404">
@@ -164,7 +184,7 @@
 			<section data-role="footer" data-position="fixed" data-id="index" data-theme="a">
 				<section data-role="navbar">
 					<ul>
-						<li><a href="#dispData" id="loadXML" Data-ajax="true">Load XML Data</a></li>
+						<li><a href="#settings" id="settings" Data-ajax="false">Settings</a></li>
 						<li><a href="index.html" Data-ajax="false">Home</a></li>
 						<li><a href="#error404" Data-ajax="false">Search</a></li>
 					</ul>
