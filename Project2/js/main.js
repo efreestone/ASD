@@ -6,6 +6,7 @@ Project 2
 */
 
 $('#index').on('pageinit', function(){
+
 	//Function to load JSON dummy data from data.json
 	$("#loadJSON").on("click", function() {
 		
@@ -17,14 +18,16 @@ $('#index').on('pageinit', function(){
 				alert("Here's JSON!");
 					for (var i=0, j=data.dates.length; i<j; i++){
 						var myJSON = data.dates[i];
-							$("<section>" + "<ul id='myDisp' data-role='listview'>" + 
+						
+							$("<ul id='myDisp' data-role='listview'>" + 
 								"<li>" + myJSON.events + "</li>" + 
 								"<li>" + myJSON.evdate + "</li>" + 
 								"<li>" + myJSON.evinfo + "</li>" + 
 								"<li>" + myJSON.importance + "</li>" + 
 								"<li>" + myJSON.attend + "</li>" + 
 								"<li>" + myJSON.details + "</li>" + 
-								"</ul>" + "</section>").appendTo("#dispData");
+								"</ul>").appendTo("#dispData");
+								console.log("id");
 				}
 			}
 		})
@@ -90,17 +93,30 @@ $("#loadXML").on("click", function() {
 						evinfo = $(this).contents("evinfo").text();
 						importance = $(this).contents("importance").text();
 						attend = $(this).contents("attend").text();
-						details = $(this).contents("details").text();
-										
-						$("<div>" + "<ul id='myDisp' data-role='listview'>" + 
+						details = $(this).contents("details").text()
+									
+						$("<ul id='myDisp' data-role='listview'>" + 
 							"<li>" + events + "</li>" +
 							"<li>" + evdate + "</li>" +
 							"<li>" + evinfo + "</li>" +
 							"<li>" + importance + "</li>" +
 							"<li>" + attend + "</li>" +
 							"<li>" + details + "</li>" +
-							"</ul>" + "</div>").appendTo("#dispData");
+							"</ul>").appendTo("#dispData");
 			});
 		}
 	});	
+});
+
+//Clear all stored data
+$("#clearData").on("click", function() {
+	if(localStorage.length === 0) {
+    	alert("No data to clear.");
+    }else{
+    var ask = confirm("Are you sure you want to delete all events?");
+            localStorage.clear();
+            alert("All events have been removed!");
+            window.location.reload();
+            return false;     
+    }
 });

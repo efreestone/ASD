@@ -87,12 +87,8 @@ a#home { /* Centering return home button on 404 */
 	margin-left: 75px;
 }
 
-a#seeSaved { /* Centering see saved dates button on index */
-	margin-left: 115px;
-}
-
-a#loadJSON { /* Centering load JSON button on index */
-	margin-left: 116.5px;
+div#indexNav { /* Centering see saved dates, load JSON and Load XML buttons on index */
+	text-align: center;
 }
 
 nav>a { /* All <a> tags within nav. Display Data, Clear Local Data, etc */
