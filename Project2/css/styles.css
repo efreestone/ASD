@@ -178,3 +178,7 @@ ul#myDisp { /* Loaded dummy data from json and xml */
     font-family: "Helvetica", "Arial";
     box-shadow: -3px 3px 8px 2px rgba(0,0,0,0.3);
 }
+
+nav#dispAdd {
+	text-align: center;
+}

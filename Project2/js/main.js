@@ -58,44 +58,6 @@ $('#addItem').on('pageinit', function(){
 			//console.log(key);
 		}
 	});
-	
-	$("submit").on("click", function() { //
-		//saveData();
-	});
-	
-
-//Function to add key and save data to local storage
-	function saveData(key) {
-   		//If there is no key, this means this is a brand new item and we need a new key.
-	   	if(!key) {
-			var id = Math.floor(Math.random()*100000001);
-		}else{
-			//Set the id to the existing key that we're editing so it will save over the data.
-			//The key is the same key that has been passed along form the editSubmit handler
-			//to the validate function, and then passed here, into the storeData finction.
-			id = key;
-		}
-        //Gather up all our form field values and store in an object.
-        //Object properties contain array with the form label and input value.
-    //getSelectedRadio();
-        var item         = {};
-            item.events   = ["Event:", $("#eventType").val()]; //Event type selector
-            item.evdate  = ["Date:", $("#evDate").val()]; //Event Date
-            item.evinfo  = ["Info:", $("#evInfo").val()]; //Event Info
-            item.importance = ["Importance:", $("#importance").val()]; //Event Importance Slider
-            //item.attend = ["Is attendance required?:", attendValue]; //Attendance Radio Buttons
-            item.details = ["Event Details:", $("#details").val()]; //Event Details
-            
-        //Save Data into Local Storage: Use Stringify to convert object to a string.
-        localStorage.setItem(id, JSON.stringify(item));
-        
-        alert("Date Saved!");
-        console.log(id);
-        window.location.reload();
-    };
-    
-    
-		
 		
 }); //End of addItem pageinit
 
@@ -117,10 +79,6 @@ var getData = function(){
 var storeData = function(data){
 	
 }; 
-
-var	deleteItem = function (){
-			
-};
 					
 var clearLocal = function(){
 
@@ -292,6 +250,7 @@ function editItem() {
 	var item = $.parseJSON(value);    
 	
 	//Populate the form fields with current localStorage values.
+	//[0] is the label. [1] is the value.
 	$("#eventType").val(item.events[1]);
 	$("#evDate").val(item.evdate[1]);
 	$("#evInfo").val(item.evinfo[1]);
@@ -315,15 +274,18 @@ function editItem() {
 //Delete single event 
 function deleteItem() {
 
-$.mobile.changePage($("#addItem"));
+	//$.mobile.changePage($("#addItem"));
+	
     var ask = confirm("Are you sure you want to delete this date?");
-    if(ask === true) {
+    if(ask) {
     	localStorage.removeItem($(this).attr("key"));
     	alert("You have successfully deleted the date!");
     	window.location.reload();
+    	//showData();
 	    //localStorage.removeItem(this.key);
 	    //alert("You have successfully deleted the date!")
 	    //window.location.reload();
+	    
     }else{
 	    alert("Date was NOT deleted.")
     }
