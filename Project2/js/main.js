@@ -261,14 +261,18 @@ function getImage(catName, makeSubList) {
 //Make Item Links
 //Create the edit and delete links for each stored item when displayed
 function makeItemLinks(key, linksLi) {
-	var editLink = $("<a></a>").attr({"href": "#", "id": "editLink",
-				"key": key }).html("Edit Date").appendTo(linksLi).on("click", editItem);
+	var editLink = $("<a></a>").attr({"href": "#", "id": "editLink", "key": key })
+							   .html("Edit Date")
+							   .appendTo(linksLi)
+							   .on("click", editItem);
 	
     //Add line break
     var breakTag = $("</br>").appendTo(linksLi);
     
-    var deleteLink = $("<a></a>").attr({"href": "#", "id": "deleteLink",
-				"key": key }).html("Delete Date").appendTo(linksLi).on("click", deleteItem);
+    var deleteLink = $("<a></a>").attr({"href": "#", "id": "deleteLink", "key": key })
+    							 .html("Delete Date")
+    							 .appendTo(linksLi)
+    							 .on("click", deleteItem);
     	
     //Add delete single item link
     //var deleteLink = document.createElement("a");
@@ -279,11 +283,6 @@ function makeItemLinks(key, linksLi) {
     //deleteLink.innerHTML = deleteText;
     //linksLi.appendChild(deleteLink);	    
 };
-
-//$("#editLink").on("click", function() {
-//	editItem(localStorage.key(i));
-	
-//});
 
 //Function for edit item link
 function editItem() {
