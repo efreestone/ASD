@@ -54,14 +54,15 @@ $('#addItem').on('pageinit', function(){
 			},
 			submitHandler: function() {
 		var data = myForm.serializeArray();
-			saveData(data);
+			saveData($('#submit').attr('key'));
 			//console.log(key);
 		}
 	});
 	
-	$("submit").on("click", function() {
-		saveData();
+	$("submit").on("click", function() { //
+		//saveData();
 	});
+	
 
 //Function to add key and save data to local storage
 	function saveData(key) {
@@ -87,16 +88,20 @@ $('#addItem').on('pageinit', function(){
             
         //Save Data into Local Storage: Use Stringify to convert object to a string.
         localStorage.setItem(id, JSON.stringify(item));
+        
         alert("Date Saved!");
-        //window.location.reload();
+        console.log(id);
+        window.location.reload();
     };
-	
+    
+    
+		
 		
 }); //End of addItem pageinit
 
 //The functions below can go inside or outside the pageinit function for the page in which it is needed.
 
-var autofillData = function (){
+function autofillData(){
 	//The actual JSON object data required for this is coming from json.js, which is loaded from our HTML page
 	//Store the JSON object into Local Storage
 	    for(var n in json) {
@@ -120,6 +125,41 @@ var	deleteItem = function (){
 var clearLocal = function(){
 
 };
+
+$("submit").on("click", function() { //
+		//saveData();
+	});
+	
+
+//Function to add key and save data to local storage
+	function saveData(key) {
+   		//If there is no key, this means this is a brand new item and we need a new key.
+	   	if(!key) {
+			var id = Math.floor(Math.random()*100000001);
+		}else{
+			//Set the id to the existing key that we're editing so it will save over the data.
+			//The key is the same key that has been passed along form the editSubmit handler
+			//to the validate function, and then passed here, into the storeData finction.
+			id = key;
+		}
+        //Gather up all our form field values and store in an object.
+        //Object properties contain array with the form label and input value.
+    //getSelectedRadio();
+        var item         = {};
+            item.events   = ["Event:", $("#eventType").val()]; //Event type selector
+            item.evdate  = ["Date:", $("#evDate").val()]; //Event Date
+            item.evinfo  = ["Info:", $("#evInfo").val()]; //Event Info
+            item.importance = ["Importance:", $("#importance").val()]; //Event Importance Slider
+            //item.attend = ["Is attendance required?:", attendValue]; //Attendance Radio Buttons
+            item.details = ["Event Details:", $("#details").val()]; //Event Details
+            
+        //Save Data into Local Storage: Use Stringify to convert object to a string.
+        localStorage.setItem(id, JSON.stringify(item));
+        
+        alert("Date Saved!");
+        console.log(id);
+        window.location.reload();
+    };
 
 //Function to load XML dummy data from data.xml
 $("#loadXML").on("click", function() {
@@ -164,4 +204,128 @@ $("#clearData").on("click", function() {
     }
 });
 
+$("#seeData").on("click", function() {
+	showData();
+});
 
+$("#displayData").on("click", function() {
+	showData();
+});
+    
+function showData() {
+        
+    if(localStorage.length === 0) {
+    	alert("There are no dates to show so default data was added.");
+    	autofillData();
+    }
+    //Write Data from Local Storage to the browser.
+    //var makeUl = document.createElement("ul");
+    //makeUl.setAttribute("id", "myDisp");
+    var makeDiv = document.createElement("div");
+    makeDiv.setAttribute("id", "items");
+    //var makeList = document.createElement("ul");
+    //makeDiv.appendChild(makeList);
+    $("#dispData").append(makeDiv);
+    //$("#items").style.display = "block";
+    for(var i=0, len=localStorage.length; i<len; i++) {
+    	//var makeLi = document.createElement("li");
+        var linksLi = document.createElement("ul");
+        //makeDiv.appendChild(makeLi);
+        var key = localStorage.key(i);
+        var value = localStorage.getItem(key);
+    //Convert the string from local storage value back to an object by using JSON.parse()
+        var obj = JSON.parse(value);
+        var makeSubList = document.createElement("ul");
+        makeDiv.appendChild(makeSubList);
+    getImage(obj.events[1], makeSubList);
+        for(var n in obj) {
+            var makeSubLi = document.createElement("li");
+            makeSubList.appendChild(makeSubLi);
+            var optSubText = obj[n][0]+" "+obj[n][1];
+            makeSubLi.innerHTML = optSubText;
+            makeSubList.appendChild(linksLi);
+        }
+        makeItemLinks(localStorage.key(i), linksLi); //Create edit and delete buttons/link for each item in local storage
+    }
+};
+
+//Get and apply the image for the correct event category.
+function getImage(catName, makeSubList) {
+	var imageLi = document.createElement("li");
+	makeSubList.appendChild(imageLi);
+	var newImg = document.createElement("img");
+	var setSrc = newImg.setAttribute("src", "img/"+ catName +".jpg");
+	imageLi.appendChild(newImg);
+};
+
+//Make Item Links
+//Create the edit and delete links for each stored item when displayed
+function makeItemLinks(key, linksLi) {
+	var editLink = $("<a></a>").attr({"href": "#", "id": "editLink",
+				"key": key }).html("Edit Date").appendTo(linksLi).on("click", editItem);
+	
+    //Add line break
+    var breakTag = $("</br>").appendTo(linksLi);
+    
+    var deleteLink = $("<a></a>").attr({"href": "#", "id": "deleteLink",
+				"key": key }).html("Delete Date").appendTo(linksLi).on("click", deleteItem);
+    	
+    //Add delete single item link
+    //var deleteLink = document.createElement("a");
+    //deleteLink.href = "#";
+    //deleteLink.key = key;
+    //var deleteText = "Delete Date";
+    ////deleteLink.addEventListener("click", deleteItem);
+    //deleteLink.innerHTML = deleteText;
+    //linksLi.appendChild(deleteLink);	    
+};
+
+//$("#editLink").on("click", function() {
+//	editItem(localStorage.key(i));
+	
+//});
+
+//Function for edit item link
+function editItem() {
+	$.mobile.changePage($("#addItem"));
+	//Grab the data from our item from local storage
+	var value = localStorage.getItem($(this).attr("key"));
+	var item = $.parseJSON(value);    
+	
+	//Populate the form fields with current localStorage values.
+	$("#eventType").val(item.events[1]);
+	$("#evDate").val(item.evdate[1]);
+	$("#evInfo").val(item.evinfo[1]);
+	$("#importance").val(item.importance[1]);
+	/*var radios = document.forms[0].attend;
+	 	for(var i=0; i<radios.length; i++) {
+		    if(radios[i].value == "Yes" && item.attend[1] == "Yes") {
+		   		radios[i].setAttribute("checked", "checked");
+		    }else if(radios[i].value == "No" && item.attend[1] == "No") {
+			    radios[i].setAttribute("checked", "checked");
+		    }else if(radios[i].value == "Undecided" && item.attend[1] == "Undecided") {
+			    radios[i].setAttribute("checked", "checked");
+			}
+	    }*/
+	$("#details").val(item.details[1]);
+	//Change text on save button
+	$('#submit').val("Edit Date");
+	$('#submit').attr("key", $(this).attr("key")); 
+};
+    
+//Delete single event 
+function deleteItem() {
+
+$.mobile.changePage($("#addItem"));
+    var ask = confirm("Are you sure you want to delete this date?");
+    if(ask === true) {
+    	localStorage.removeItem($(this).attr("key"));
+    	alert("You have successfully deleted the date!");
+    	window.location.reload();
+	    //localStorage.removeItem(this.key);
+	    //alert("You have successfully deleted the date!")
+	    //window.location.reload();
+    }else{
+	    alert("Date was NOT deleted.")
+    }
+};
