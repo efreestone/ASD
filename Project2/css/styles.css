@@ -11,7 +11,7 @@ Project 2
     background-color: #7ED0E0 !important;
 }
 
-a>img { /* To Center my Feature on index and logo/escape hatch on dispData */
+a>img { /* To Center my Feature on index */
 	display: block;
 	margin-left: auto;
     margin-right: auto;
@@ -55,11 +55,11 @@ fieldset#inputBottom { /* Light colored box around bottom part of Input form */
     box-shadow: -3px 3px 8px 2px rgba(0,0,0,0.3);
 }
 
-h1 { /* Logo on addItem */
+h1 { /* Logo on addItem, dispData, and settings */
 	text-align: center;
     margin-left: auto;
     margin-right: auto;
-    margin-top: -1px;
+    margin-top: 10px;
     margin-bottom: 4px;
 }
 
@@ -153,6 +153,19 @@ input#reset { /* Browse by Event Type icons */
     color: #ffffff;
 }
 
+div>ul {
+	background-color: #ccf5fd;
+    color: #172934;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    border: solid 1px #172934;
+    margin-bottom: 5px;
+    padding-top: 5px;
+    padding-left: -5px;
+    font-family: "Helvetica", "Arial";
+    box-shadow: -3px 3px 8px 2px rgba(0,0,0,0.3);
+}
+
 ul#myDisp { /* Loaded dummy data from json and xml */
     background-color: #ccf5fd;
     color: #172934;
@@ -164,4 +177,8 @@ ul#myDisp { /* Loaded dummy data from json and xml */
     padding-left: -5px;
     font-family: "Helvetica", "Arial";
     box-shadow: -3px 3px 8px 2px rgba(0,0,0,0.3);
+}
+
+nav#dispAdd {
+	text-align: center;
 }

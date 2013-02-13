@@ -34,15 +34,15 @@
 			<a href="#addItem" Data-ajax="false" id="feature"><img src="img/Logo1.jpg" data-id="feature" alt="Feature"></img></a></br>
 			
 			<div id="indexNav"><nav>
-				<a href="#dispData" id="seeSaved" Data-ajax="false">See Saved Dates</a>
+				<a href="#dispData" id="seeData" data-role="none" Data-ajax="false">See Saved Dates</a>
 			</nav></div></br>
 			
 			<div id="indexNav"><nav>
-				<a href="#dispData" id="loadJSON">Load JSON Data</a>
+				<a href="#dispData" id="loadJSON" data-role="none" Data-ajax="true">Load JSON Data</a>
 			</nav></div></br>
 			
 			<div id="indexNav"><nav>
-				<a href="#dispData" id="loadXML" Data-ajax="true">Load XML Data</a>
+				<a href="#dispData" id="loadXML" data-role="none" Data-ajax="true">Load XML Data</a>
 			</nav></div></br>
 		
 			<section data-role="footer" data-position="fixed" data-id="index" data-theme="a">
@@ -120,7 +120,7 @@
 		<!-- Clear Stored Data Link -->
 				<a href="#" id="clearData" data-role="none" Data-ajax="false">Clear Local Data</a> 
 		<!-- Display Data Link -->
-				<a href="#" id="displayData" data-role="none" Data-ajax="false">Display Data</a>
+				<a href="#dispData" id="displayData" data-role="none" Data-ajax="false">Display Data</a>
 		<!-- Add New Date Link -->
 				<a href="#addItem" id="addNew" style="display:none;" data-role="none" Data-ajax="false">Add New Date</a>
 			</nav>
@@ -141,10 +141,13 @@
 	
 	<!-- Start of dispData -->
 		<section data-role="page" id="dispData">
-			<a href="#index" Data-ajax="false"><img src="img/Logo.jpg" data-id="escape" alt="Logo"></img></a>
+			<h1><img src="img/Logo.jpg"></img></h1>
 		
 		
-		
+			<nav id="dispAdd">
+		<!-- Add New Date Link -->
+				<a href="#addItem" id="addNew" data-role="none" Data-ajax="false">Add New Date</a>
+			</nav>
 			<section data-role="footer" data-position="fixed" data-id="index" data-theme="a">
 				<section data-role="navbar">
 					<ul>
@@ -159,7 +162,8 @@
 	
 	<!-- Start of settings -->
 		<section data-role="page" id="settings">
-			<a href="#index" Data-ajax="false"><img src="img/Logo.jpg" data-id="escape" alt="Logo"></img></a>
+			<h1><img src="img/Logo.jpg"></img></h1>
+			
 			
 			<section data-role="footer" data-position="fixed" data-id="index" data-theme="a">
 				<section data-role="navbar">
@@ -199,7 +203,7 @@
 	<!-- JavaScript under here -->
 	<!-- <script type="text/javascript" src="js/libs/jquery-1.9.1.js"></script> -->
 	<script type="text/javascript" src="js/libs/jquery-1.8.3.js"></script>
-	<script type="text/javascript" src="js/libs/jquery.mobile-1.2.0.js"></script> 
+	<script type="text/javascript" src="js/libs/jquery.mobile-1.2.0.js"></script>
 	<script type="text/javascript" src="js/libs/jquery.validate.min.js"></script>
 	<script type="text/javascript" src="js/json.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
