@@ -80,7 +80,7 @@ var json = { //Needs 20 Events
 	
 	"event9": {
 		"events": ["Event type:", "Birthday"],
-		"evdate": ["Date:", "2013-02-22"],
+		"evdate": ["Date:", "2013-01-22"],
 		"evinfo": ["Info:", "Dads Birthday"],
 		"importance": ["Importance:", "5"],
 		"attend": ["Is attendance required?:", "Yes"],
@@ -89,7 +89,7 @@ var json = { //Needs 20 Events
 	
 	"event10": {
 		"events": ["Event type:", "Birthday"],
-		"evdate": ["Date:", "2013-01-22"],
+		"evdate": ["Date:", "2013-02-22"],
 		"evinfo": ["Info:", "Moms Birthday"],
 		"importance": ["Importance:", "5"],
 		"attend": ["Is attendance required?:", "No"],

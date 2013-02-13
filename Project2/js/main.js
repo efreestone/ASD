@@ -33,7 +33,37 @@ $('#index').on('pageinit', function(){
 		})
 	});
 	
-});	
+	//Function to load XML dummy data from data.xml
+	$("#loadXML").on("click", function() {
+		
+		$.ajax({
+			url: "js/data.xml",
+			type: "GET",
+			dataType: "xml",
+			success: function(data) {
+				alert("Here's XML!");
+					$(data).find("dates").each(function(){
+						var events = $(this).contents("events").text();
+							evdate = $(this).contents("evdate").text();
+							evinfo = $(this).contents("evinfo").text();
+							importance = $(this).contents("importance").text();
+							attend = $(this).contents("attend").text();
+							details = $(this).contents("details").text()
+									
+							$("<ul id='myDisp' data-role='listview'>" + 
+								"<li>" + events + "</li>" +
+								"<li>" + evdate + "</li>" +
+								"<li>" + evinfo + "</li>" +
+								"<li>" + importance + "</li>" +
+								"<li>" + attend + "</li>" +
+								"<li>" + details + "</li>" +
+								"</ul>").appendTo("#dispData");
+				});
+			}
+		});	
+	});
+	
+}); //End of index pageinit	
 		
 $('#addItem').on('pageinit', function(){
 
@@ -61,8 +91,7 @@ $('#addItem').on('pageinit', function(){
 		
 }); //End of addItem pageinit
 
-//The functions below can go inside or outside the pageinit function for the page in which it is needed.
-
+//Function to autofill local storage for testing. REMOVE FROM FINAL APP!!
 function autofillData(){
 	//The actual JSON object data required for this is coming from json.js, which is loaded from our HTML page
 	//Store the JSON object into Local Storage
@@ -72,82 +101,41 @@ function autofillData(){
 		} 
 };
 
-var getData = function(){
-
-};
-
-var storeData = function(data){
-	
-}; 
-					
-var clearLocal = function(){
-
-};
-
+//Event listener for "Save Date!" button on addItem
 $("submit").on("click", function() { //
-		//saveData();
-	});
+	//saveData();
+});
 	
 
 //Function to add key and save data to local storage
-	function saveData(key) {
-   		//If there is no key, this means this is a brand new item and we need a new key.
-	   	if(!key) {
-			var id = Math.floor(Math.random()*100000001);
-		}else{
-			//Set the id to the existing key that we're editing so it will save over the data.
-			//The key is the same key that has been passed along form the editSubmit handler
-			//to the validate function, and then passed here, into the storeData finction.
-			id = key;
-		}
-        //Gather up all our form field values and store in an object.
-        //Object properties contain array with the form label and input value.
-    //getSelectedRadio();
-        var item         = {};
-            item.events   = ["Event:", $("#eventType").val()]; //Event type selector
-            item.evdate  = ["Date:", $("#evDate").val()]; //Event Date
-            item.evinfo  = ["Info:", $("#evInfo").val()]; //Event Info
-            item.importance = ["Importance:", $("#importance").val()]; //Event Importance Slider
-            //item.attend = ["Is attendance required?:", attendValue]; //Attendance Radio Buttons
-            item.details = ["Event Details:", $("#details").val()]; //Event Details
+function saveData(key) {
+	//If there is no key, this means this is a brand new item and we need a new key.
+	if(!key) {
+		var id = Math.floor(Math.random()*100000001);
+	}else{
+		//Set the id to the existing key that we're editing so it will save over the data.
+		//The key is the same key that has been passed along form the editSubmit handler
+		//to the validate function, and then passed here, into the storeData finction.
+		id = key;
+	}
+    //Gather up all our form field values and store in an object.
+    //Object properties contain array with the form label and input value.
+//getSelectedRadio();
+    var item         = {};
+        item.events   = ["Event:", $("#eventType").val()]; //Event type selector
+        item.evdate  = ["Date:", $("#evDate").val()]; //Event Date
+        item.evinfo  = ["Info:", $("#evInfo").val()]; //Event Info
+        item.importance = ["Importance:", $("#importance").val()]; //Event Importance Slider
+        //item.attend = ["Is attendance required?:", attendValue]; //Attendance Radio Buttons
+        item.details = ["Event Details:", $("#details").val()]; //Event Details
             
-        //Save Data into Local Storage: Use Stringify to convert object to a string.
-        localStorage.setItem(id, JSON.stringify(item));
+    //Save Data into Local Storage: Use Stringify to convert object to a string.
+    localStorage.setItem(id, JSON.stringify(item));
         
-        alert("Date Saved!");
-        console.log(id);
-        window.location.reload();
-    };
-
-//Function to load XML dummy data from data.xml
-$("#loadXML").on("click", function() {
-		
-	$.ajax({
-		url: "js/data.xml",
-		type: "GET",
-		dataType: "xml",
-		success: function(data) {
-			alert("Here's XML!");
-				$(data).find("dates").each(function(){
-					var events = $(this).contents("events").text();
-						evdate = $(this).contents("evdate").text();
-						evinfo = $(this).contents("evinfo").text();
-						importance = $(this).contents("importance").text();
-						attend = $(this).contents("attend").text();
-						details = $(this).contents("details").text()
-									
-						$("<ul id='myDisp' data-role='listview'>" + 
-							"<li>" + events + "</li>" +
-							"<li>" + evdate + "</li>" +
-							"<li>" + evinfo + "</li>" +
-							"<li>" + importance + "</li>" +
-							"<li>" + attend + "</li>" +
-							"<li>" + details + "</li>" +
-							"</ul>").appendTo("#dispData");
-			});
-		}
-	});	
-});
+    alert("Date Saved!");
+    //console.log(id);
+    window.location.reload();
+};
 
 //Clear all stored data
 $("#clearData").on("click", function() {
@@ -162,14 +150,16 @@ $("#clearData").on("click", function() {
     }
 });
 
+//Event listener for "See Saved Dates" button on index
 $("#seeData").on("click", function() {
 	showData();
 });
-
+//Event listener for "Display Data" button on addItem
 $("#displayData").on("click", function() {
 	showData();
 });
-    
+   
+//Function to display items from local storage 
 function showData() {
         
     if(localStorage.length === 0) {
@@ -177,18 +167,11 @@ function showData() {
     	autofillData();
     }
     //Write Data from Local Storage to the browser.
-    //var makeUl = document.createElement("ul");
-    //makeUl.setAttribute("id", "myDisp");
     var makeDiv = document.createElement("div");
     makeDiv.setAttribute("id", "items");
-    //var makeList = document.createElement("ul");
-    //makeDiv.appendChild(makeList);
     $("#dispData").append(makeDiv);
-    //$("#items").style.display = "block";
     for(var i=0, len=localStorage.length; i<len; i++) {
-    	//var makeLi = document.createElement("li");
         var linksLi = document.createElement("ul");
-        //makeDiv.appendChild(makeLi);
         var key = localStorage.key(i);
         var value = localStorage.getItem(key);
     //Convert the string from local storage value back to an object by using JSON.parse()
@@ -230,16 +213,7 @@ function makeItemLinks(key, linksLi) {
     var deleteLink = $("<a></a>").attr({"href": "#", "id": "deleteLink", "key": key })
     							 .html("Delete Date")
     							 .appendTo(linksLi)
-    							 .on("click", deleteItem);
-    	
-    //Add delete single item link
-    //var deleteLink = document.createElement("a");
-    //deleteLink.href = "#";
-    //deleteLink.key = key;
-    //var deleteText = "Delete Date";
-    ////deleteLink.addEventListener("click", deleteItem);
-    //deleteLink.innerHTML = deleteText;
-    //linksLi.appendChild(deleteLink);	    
+    							 .on("click", deleteItem);    
 };
 
 //Function for edit item link
