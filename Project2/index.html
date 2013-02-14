@@ -34,17 +34,17 @@
 			<a href="#addItem" Data-ajax="false" id="feature"><img src="img/Logo1.jpg" data-id="feature" alt="Feature"></img></a></br>
 			
 			<div id="indexNav"><nav>
-				<a href="#dispData" id="seeData" data-role="none" Data-ajax="false">See Saved Dates</a>
+				<a href="#" id="seeData" data-role="none" Data-ajax="false">See Saved Dates</a>
 			</nav></div></br>
 			
 			<div id="indexNav"><nav>
-				<a href="#dispData" id="loadJSON" data-role="none" Data-ajax="true">Load JSON Data</a>
+				<a href="#" id="loadJSON" data-role="none" Data-ajax="true">Load JSON Data</a>
 			</nav></div></br>
 			
 			<div id="indexNav"><nav>
-				<a href="#dispData" id="loadXML" data-role="none" Data-ajax="true">Load XML Data</a>
+				<a href="#" id="loadXML" data-role="none" Data-ajax="true">Load XML Data</a>
 			</nav></div></br>
-		
+		<!-- Start of navbar -->
 			<section data-role="footer" data-position="fixed" data-id="index" data-theme="a">
 				<section data-role="navbar">
 					<ul>
@@ -54,6 +54,7 @@
 					</ul>
 				</section>
 			</section>
+		<!-- End of navbar -->
 		</section>
 	<!-- End of index -->
 	
@@ -68,7 +69,7 @@
 				<ul data-role="content">
 		<!-- Type of Event -->
 					<li><label for="eventType">*Type of Event:</label>
-						<select name="eventType" id="eventType"  class="required" data-role="none">
+						<select data-mini="true" name="eventType" id="eventType"  class="required">
 							<option value="" data-placeholder="true">--Choose An Event Type--</option>
 							<option value="Anniversary">Anniversary</option>
 							<option value="Appointment">Appointment</option>
@@ -79,33 +80,38 @@
 					</li>
 		<!-- Date of Event -->
 					<li><label for="evDate">*Event Date:</label>
-						<input type="date" name="evDate" id="evDate" value="" class="required" data-role="none"/>
+						<input type="date" name="evDate" id="evDate" value="" class="required"/>
 					</li>
 		<!-- Event Description -->
 					<li><label for="evInfo">*Event Information:</label>
-						<input type="text" name="evInfo" id="evInfo" value="" placeholder="Dads birthday, etc." class="required" data-role="none"/>
+						<input data-mini="true" type="text" name="evInfo" id="evInfo" value="" placeholder="Dads birthday, etc." class="required"/>
 					</li>
 		<!-- Importance of Event Slider -->
-					<li><label for="importance">Event Importance:</label>
+					<!-- <li><label for="importance">Event Importance:</label>
 						<input type="range" name="importance" id="importance" value="3" min="1" max="5" data-track-theme="c" data-mini="true"/>	
 		<!-- Attendance required?  -->
 		
-					<li>Is Attendance Required?
-						<ul class="checkbox">
-							<li><input type="radio" value="Yes" id="Yes" name="attend" data-role="none"/>
+					<li><label for="attend">Is Attendance Required?</label>
+						
+								<label for="attend">
+									<input type="checkbox" value="Yes" id="Yes "name="attend" data-role="checkbox" data-mini="true"></input>
+								Yes</label>
+							
+							<!-- <li><input type="radio" value="Yes" id="Yes" name="attend" data-mini="true"/>
 								<label for="Yes">Yes</label></li>
-							<li><input type="radio" value="No" id="No" name="attend" data-role="none"/>
+							<li><input type="radio" value="No" id="No" name="attend" data-mini="true"/>
 								<label for="No">No</label></li>
-							<li><input type="radio" value="Undecided" id="Undecided" name="attend" checked="checked" data-role="none"/>
-								<label for="Undecided">Undecided</label></li>
-						</ul>
+							<li><input type="radio" value="Undecided" id="Undecided" name="attend" checked="checked" data-mini="true"/>
+								<label for="Undecided">Undecided</label></li> -->
+						
 					</li>
 				</ul>				
 				</fieldset>
 				<fieldset id="inputBottom" data-role="none">
 					<legend>Event Details</legend>
 		<!-- Event Details (ie location of party etc) -->
-					<label for="details"></label><textarea data-role="none" id="details" placeholder="Party Location, Contact Info, etc."></textarea>
+					<label for="details"></label>
+						<textarea id="details" placeholder="Party Location, Contact Info, etc." data-role="none"></textarea>
 		<!-- Hidden Input -->	
 					<input type="hidden" value="true"/>
 				</fieldset>
@@ -120,13 +126,10 @@
 		<!-- Clear Stored Data Link -->
 				<a href="#" id="clearData" data-role="none" Data-ajax="false">Clear Local Data</a> 
 		<!-- Display Data Link -->
-				<a href="#dispData" id="displayData" data-role="none" Data-ajax="false">Display Data</a>
-		<!-- Add New Date Link -->
-				<a href="#addItem" id="addNew" style="display:none;" data-role="none" Data-ajax="false">Add New Date</a>
+				<a href="#" id="displayData" data-role="none" Data-ajax="false">Display Data</a>
 			</nav>
 		
-		
-		
+		<!-- Start of navbar -->
 			<section data-role="footer" data-position="fixed" data-id="index" data-theme="a">
 				<section data-role="navbar">
 					<ul>
@@ -136,18 +139,19 @@
 					</ul>
 				</section>
 			</section>
+		<!-- End of navbar -->
 		</section>
 	<!-- End of addItem -->
 	
 	<!-- Start of dispData -->
 		<section data-role="page" id="dispData">
 			<h1><img src="img/Logo.jpg"></img></h1>
-		
-		
+				
 			<nav id="dispAdd">
 		<!-- Add New Date Link -->
-				<a href="#addItem" id="addNew" data-role="none" Data-ajax="false">Add New Date</a>
+				<a href="#" id="addNew" data-role="none" Data-ajax="false">Add New Date</a>
 			</nav>
+		<!-- Start of navbar -->
 			<section data-role="footer" data-position="fixed" data-id="index" data-theme="a">
 				<section data-role="navbar">
 					<ul>
@@ -157,6 +161,7 @@
 					</ul>
 				</section>
 			</section>
+		<!-- End of navbar -->
 		</section>
 	<!-- End of dispData -->
 	
@@ -164,7 +169,7 @@
 		<section data-role="page" id="settings">
 			<h1><img src="img/Logo.jpg"></img></h1>
 			
-			
+		<!-- Start of navbar -->	
 			<section data-role="footer" data-position="fixed" data-id="index" data-theme="a">
 				<section data-role="navbar">
 					<ul>
@@ -174,6 +179,7 @@
 					</ul>
 				</section>
 			</section>
+		<!-- End of navbar -->
 		</section>
 	<!-- End of settings -->
 	
@@ -185,6 +191,7 @@
 			<nav>
 				<a href="#index" id="home">Click here to return home</a>
 			</nav>
+		<!-- Start of navbar -->
 			<section data-role="footer" data-position="fixed" data-id="index" data-theme="a">
 				<section data-role="navbar">
 					<ul>
@@ -194,6 +201,7 @@
 					</ul>
 				</section>
 			</section>
+		<!-- End of navbar -->
 		</section>
 	<!-- End of error404 -->
 	

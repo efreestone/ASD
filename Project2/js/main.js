@@ -9,6 +9,7 @@ $('#index').on('pageinit', function(){
 
 	//Function to load JSON dummy data from data.json
 	$("#loadJSON").on("click", function() {
+		$.mobile.changePage($("#dispData"));
 		
 		$.ajax({
 			url: "js/data.json",
@@ -35,6 +36,7 @@ $('#index').on('pageinit', function(){
 	
 	//Function to load XML dummy data from data.xml
 	$("#loadXML").on("click", function() {
+		$.mobile.changePage($("#dispData"));
 		
 		$.ajax({
 			url: "js/data.xml",
@@ -102,8 +104,8 @@ function autofillData(){
 };
 
 //Event listener for "Save Date!" button on addItem
-$("submit").on("click", function() { //
-	//saveData();
+$("submit").on("click", function() { 
+	//saveData(); //Not sure how this works with saveData commented out.
 });
 	
 
@@ -125,7 +127,7 @@ function saveData(key) {
         item.events   = ["Event:", $("#eventType").val()]; //Event type selector
         item.evdate  = ["Date:", $("#evDate").val()]; //Event Date
         item.evinfo  = ["Info:", $("#evInfo").val()]; //Event Info
-        item.importance = ["Importance:", $("#importance").val()]; //Event Importance Slider
+        //item.importance = ["Importance:", $("#importance").val()]; //Event Importance Slider
         //item.attend = ["Is attendance required?:", attendValue]; //Attendance Radio Buttons
         item.details = ["Event Details:", $("#details").val()]; //Event Details
             
@@ -158,10 +160,16 @@ $("#seeData").on("click", function() {
 $("#displayData").on("click", function() {
 	showData();
 });
+//Event listener for "Add New Date" button on dispData
+$("#addNew").on("click", function() {
+	$.mobile.changePage($("#addItem"));
+	window.location.reload();//Workaround to fix duplicate displayed data issue. Working on real fix.	
+});
    
 //Function to display items from local storage 
 function showData() {
-        
+	$.mobile.changePage($("#dispData"));
+    //Check if there are any items in local storage  
     if(localStorage.length === 0) {
     	alert("There are no dates to show so default data was added.");
     	autofillData();
@@ -199,7 +207,6 @@ function getImage(catName, makeSubList) {
 	imageLi.appendChild(newImg);
 };
 
-//Make Item Links
 //Create the edit and delete links for each stored item when displayed
 function makeItemLinks(key, linksLi) {
 	var editLink = $("<a></a>").attr({"href": "#", "id": "editLink", "key": key })
@@ -228,7 +235,7 @@ function editItem() {
 	$("#eventType").val(item.events[1]);
 	$("#evDate").val(item.evdate[1]);
 	$("#evInfo").val(item.evinfo[1]);
-	$("#importance").val(item.importance[1]);
+	//$("#importance").val(item.importance[1]);
 	/*var radios = document.forms[0].attend;
 	 	for(var i=0; i<radios.length; i++) {
 		    if(radios[i].value == "Yes" && item.attend[1] == "Yes") {
@@ -247,18 +254,23 @@ function editItem() {
     
 //Delete single event 
 function deleteItem() {
-
-	//$.mobile.changePage($("#addItem"));
+	
+	//$.mobile.changePage("#dispData");
 	
     var ask = confirm("Are you sure you want to delete this date?");
     if(ask) {
     	localStorage.removeItem($(this).attr("key"));
     	alert("You have successfully deleted the date!");
-    	window.location.reload();
+    	
+    	//history.go(0);
+    	//showData();
+    	//$.mobile.changePage($("#dispData"));
+    	//window.opener.updateContent();
     	//showData();
 	    //localStorage.removeItem(this.key);
 	    //alert("You have successfully deleted the date!")
-	    //window.location.reload();
+	    window.location.reload();
+	    //return false;
 	    
     }else{
 	    alert("Date was NOT deleted.")
