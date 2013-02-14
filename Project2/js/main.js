@@ -5,7 +5,7 @@ Project 2
 2-8-13
 */
 
-$('#index').on('pageinit', function(){
+$("#index").on("pageinit", function(){
 
 	//Function to load JSON dummy data from data.json
 	$("#loadJSON").on("click", function() {
@@ -24,7 +24,6 @@ $('#index').on('pageinit', function(){
 								"<li>" + myJSON.events + "</li>" + 
 								"<li>" + myJSON.evdate + "</li>" + 
 								"<li>" + myJSON.evinfo + "</li>" + 
-								"<li>" + myJSON.importance + "</li>" + 
 								"<li>" + myJSON.attend + "</li>" + 
 								"<li>" + myJSON.details + "</li>" + 
 								"</ul>").appendTo("#dispData");
@@ -48,7 +47,6 @@ $('#index').on('pageinit', function(){
 						var events = $(this).contents("events").text();
 							evdate = $(this).contents("evdate").text();
 							evinfo = $(this).contents("evinfo").text();
-							importance = $(this).contents("importance").text();
 							attend = $(this).contents("attend").text();
 							details = $(this).contents("details").text()
 									
@@ -67,10 +65,10 @@ $('#index').on('pageinit', function(){
 	
 }); //End of index pageinit	
 		
-$('#addItem').on('pageinit', function(){
+$("#addItem").on('pageinit', function(){
 
 	var myForm = $("#eventForm"),
-		popErrors = $('#popErrors');
+		popErrors = $("#popErrors");
 			
 		myForm.validate({
 		invalidHandler: function(form, validator) {
@@ -78,15 +76,15 @@ $('#addItem').on('pageinit', function(){
 			var html = '';
 				for(var key in validator.submitted) {
 					var label = $('label[for^="'+ key +'"]') // Selector search for required labels not filled out
-					var legend = label.closest('fieldset').find('ui-controlgroup-label');
+					var legend = label.closest("fieldset").find("ui-controlgroup-label");
 					var fieldName = legend.length ? legend.text() : label.text();
-					html += '<li>'+ fieldName +'</li>';
+					html += "<li>"+ fieldName +"</li>";
 				};
 				$("#formErrors ul").html(html); // Fill out Pop up error text
 			},
 			submitHandler: function() {
 		var data = myForm.serializeArray();
-			saveData($('#submit').attr('key'));
+			saveData($("#submit").attr("key"));
 			//console.log(key);
 		}
 	});
@@ -127,7 +125,6 @@ function saveData(key) {
         item.events   = ["Event:", $("#eventType").val()]; //Event type selector
         item.evdate  = ["Date:", $("#evDate").val()]; //Event Date
         item.evinfo  = ["Info:", $("#evInfo").val()]; //Event Info
-        //item.importance = ["Importance:", $("#importance").val()]; //Event Importance Slider
         //item.attend = ["Is attendance required?:", attendValue]; //Attendance Radio Buttons
         item.details = ["Event Details:", $("#details").val()]; //Event Details
             
@@ -235,17 +232,8 @@ function editItem() {
 	$("#eventType").val(item.events[1]);
 	$("#evDate").val(item.evdate[1]);
 	$("#evInfo").val(item.evinfo[1]);
-	//$("#importance").val(item.importance[1]);
-	/*var radios = document.forms[0].attend;
-	 	for(var i=0; i<radios.length; i++) {
-		    if(radios[i].value == "Yes" && item.attend[1] == "Yes") {
-		   		radios[i].setAttribute("checked", "checked");
-		    }else if(radios[i].value == "No" && item.attend[1] == "No") {
-			    radios[i].setAttribute("checked", "checked");
-		    }else if(radios[i].value == "Undecided" && item.attend[1] == "Undecided") {
-			    radios[i].setAttribute("checked", "checked");
-			}
-	    }*/
+	
+	
 	$("#details").val(item.details[1]);
 	//Change text on save button
 	$('#submit').val("Edit Date");
