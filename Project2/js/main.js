@@ -5,7 +5,7 @@ Project 2
 2-8-13
 */
 
-$("#index").on("pageinit", function(){
+$("#index").on("pageinit", function() {
 
 	//Function to load JSON dummy data from data.json
 	$("#loadJSON").on("click", function() {
@@ -65,7 +65,7 @@ $("#index").on("pageinit", function(){
 	
 }); //End of index pageinit	
 		
-$("#addItem").on('pageinit', function(){
+$("#addItem").on("pageinit", function() {
 
 	var myForm = $("#eventForm"),
 		popErrors = $("#popErrors");
@@ -91,6 +91,18 @@ $("#addItem").on('pageinit', function(){
 		
 }); //End of addItem pageinit
 
+$("#dispData").on("pageinit", function() {
+	//Code needed for dispData goes here
+}); //End of dispData pageinit
+
+$("#error404").on("pageinit", function() {
+	//Code needed for error404 goes here
+}); //End of error404 pageinit
+
+$("#settingsPage").on("pageinit", function() {
+	//Code needed for settingsPage goes here
+}); //End of settingsPage pageinit
+
 //Function to autofill local storage for testing. REMOVE FROM FINAL APP!!
 function autofillData(){
 	//The actual JSON object data required for this is coming from json.js, which is loaded from our HTML page
@@ -105,7 +117,17 @@ function autofillData(){
 $("submit").on("click", function() { 
 	//saveData(); //Not sure how this works with saveData commented out.
 });
-	
+
+//Function to grab the value of attend checkbox
+function attendCheck() {
+	if($("#attend").is(":checked")){
+		attendReq = $("#attend").val();
+		//$("#attend").attr("checked", true);
+	}else{
+		attendReq = "No";
+	}
+	return attendReq;
+};
 
 //Function to add key and save data to local storage
 function saveData(key) {
@@ -120,12 +142,13 @@ function saveData(key) {
 	}
     //Gather up all our form field values and store in an object.
     //Object properties contain array with the form label and input value.
-//getSelectedRadio();
+    attendCheck();
+    console.log(attendReq);
     var item         = {};
-        item.events   = ["Event:", $("#eventType").val()]; //Event type selector
+        item.events  = ["Event:", $("#eventType").val()]; //Event type selector
         item.evdate  = ["Date:", $("#evDate").val()]; //Event Date
         item.evinfo  = ["Info:", $("#evInfo").val()]; //Event Info
-        //item.attend = ["Is attendance required?:", attendValue]; //Attendance Radio Buttons
+        item.attend  = ["Is attendance required?:", attendReq]; //Attendance Checkbox
         item.details = ["Event Details:", $("#details").val()]; //Event Details
             
     //Save Data into Local Storage: Use Stringify to convert object to a string.
@@ -232,8 +255,9 @@ function editItem() {
 	$("#eventType").val(item.events[1]);
 	$("#evDate").val(item.evdate[1]);
 	$("#evInfo").val(item.evinfo[1]);
-	
-	
+		if(item.attend[1] == "Yes") {
+			$("#attend").prop(":checked", true);
+		}
 	$("#details").val(item.details[1]);
 	//Change text on save button
 	$('#submit').val("Edit Date");

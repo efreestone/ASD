@@ -26,7 +26,7 @@ var json = { //Needs 20 Events
 		"events": ["Event type:", "Other"],
 		"evdate": ["Date:", "2012-12-21"],
 		"evinfo": ["Info:", "End of the world"],
-		"attend": ["Is attendance required?:", "Undecided"],
+		"attend": ["Is attendance required?:", "No"],
 		"details": ["Event details:", "This should be interesting..."],
 	},
 	
@@ -50,7 +50,7 @@ var json = { //Needs 20 Events
 		"events": ["Event type:", "Birthday"],
 		"evdate": ["Date:", "2013-06-21"],
 		"evinfo": ["Info:", "Brothers Birthday"],
-		"attend": ["Is attendance required?:", "Undecided"],
+		"attend": ["Is attendance required?:", "Yes"],
 		"details": ["Event details:", "BBQ at Dads. 4:30pm."],
 	},
 	
@@ -106,7 +106,7 @@ var json = { //Needs 20 Events
 		"events": ["Event type:", "Other"],
 		"evdate": ["Date:", "2012-10-31"],
 		"evinfo": ["Info:", "Halloween"],
-		"attend": ["Is attendance required?:", "Undecided"],
+		"attend": ["Is attendance required?:", "Yes"],
 		"details": ["Event details:", "Trick or treat!!"],
 	},
 	
