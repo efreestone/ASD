@@ -34,26 +34,27 @@
 			<a href="#addItem" Data-ajax="false" id="feature"><img src="img/Logo1.jpg" data-id="feature" alt="Feature"></img></a></br>
 			
 			<div id="indexNav"><nav>
-				<a href="#dispData" id="seeData" data-role="none" Data-ajax="false">See Saved Dates</a>
+				<a href="#" id="seeData" data-role="none" Data-ajax="false">See Saved Dates</a>
 			</nav></div></br>
 			
 			<div id="indexNav"><nav>
-				<a href="#dispData" id="loadJSON" data-role="none" Data-ajax="true">Load JSON Data</a>
+				<a href="#" id="loadJSON" data-role="none" Data-ajax="true">Load JSON Data</a>
 			</nav></div></br>
 			
 			<div id="indexNav"><nav>
-				<a href="#dispData" id="loadXML" data-role="none" Data-ajax="true">Load XML Data</a>
+				<a href="#" id="loadXML" data-role="none" Data-ajax="true">Load XML Data</a>
 			</nav></div></br>
-		
+		<!-- Start of navbar -->
 			<section data-role="footer" data-position="fixed" data-id="index" data-theme="a">
 				<section data-role="navbar">
 					<ul>
-						<li><a href="#settings" id="settings" Data-ajax="false">Settings</a></li>
+						<li><a href="#settingsPage" id="settings" Data-ajax="false">Settings</a></li>
 						<li><a href="index.html" Data-ajax="false">Home</a></li>
 						<li><a href="#error404" Data-ajax="false">Search</a></li>
 					</ul>
 				</section>
 			</section>
+		<!-- End of navbar -->
 		</section>
 	<!-- End of index -->
 	
@@ -68,7 +69,7 @@
 				<ul data-role="content">
 		<!-- Type of Event -->
 					<li><label for="eventType">*Type of Event:</label>
-						<select name="eventType" id="eventType"  class="required" data-role="none">
+						<select data-mini="true" name="eventType" id="eventType"  class="required">
 							<option value="" data-placeholder="true">--Choose An Event Type--</option>
 							<option value="Anniversary">Anniversary</option>
 							<option value="Appointment">Appointment</option>
@@ -79,33 +80,26 @@
 					</li>
 		<!-- Date of Event -->
 					<li><label for="evDate">*Event Date:</label>
-						<input type="date" name="evDate" id="evDate" value="" class="required" data-role="none"/>
+						<input type="date" name="evDate" id="evDate" value="" class="required"/>
 					</li>
 		<!-- Event Description -->
 					<li><label for="evInfo">*Event Information:</label>
-						<input type="text" name="evInfo" id="evInfo" value="" placeholder="Dads birthday, etc." class="required" data-role="none"/>
+						<input data-mini="true" type="text" name="evInfo" id="evInfo" value="" placeholder="Dads birthday, etc." class="required"/>
 					</li>
-		<!-- Importance of Event Slider -->
-					<li><label for="importance">Event Importance:</label>
-						<input type="range" name="importance" id="importance" value="3" min="1" max="5" data-track-theme="c" data-mini="true"/>	
 		<!-- Attendance required?  -->
-		
-					<li>Is Attendance Required?
-						<ul class="checkbox">
-							<li><input type="radio" value="Yes" id="Yes" name="attend" data-role="none"/>
-								<label for="Yes">Yes</label></li>
-							<li><input type="radio" value="No" id="No" name="attend" data-role="none"/>
-								<label for="No">No</label></li>
-							<li><input type="radio" value="Undecided" id="Undecided" name="attend" checked="checked" data-role="none"/>
-								<label for="Undecided">Undecided</label></li>
-						</ul>
+					<li><label for="attendance">Is Attendance Required?</label>
+							<label for="attend">Yes
+								<input type="checkbox" value="Yes" id="attend" data-role="checkbox" data-mini="true" class="custom"></input>
+							</label>
+						</label>
 					</li>
 				</ul>				
 				</fieldset>
 				<fieldset id="inputBottom" data-role="none">
 					<legend>Event Details</legend>
 		<!-- Event Details (ie location of party etc) -->
-					<label for="details"></label><textarea data-role="none" id="details" placeholder="Party Location, Contact Info, etc."></textarea>
+					<label for="details"></label>
+						<textarea id="details" placeholder="Party Location, Contact Info, etc." data-role="none"></textarea>
 		<!-- Hidden Input -->	
 					<input type="hidden" value="true"/>
 				</fieldset>
@@ -113,69 +107,111 @@
 				<input type="submit" value="Save Date!" id="submit" data-role="none" Data-ajax="false"/>
 		<!-- Reset Form Button -->
 				<input type="reset" value="Reset Form" id="reset" data-icon="delete" data-mini="true" data-inline="true" data-role="none"/>
-				
+		<!-- Validation error pop-up -->
 				<a href="#formErrors" id="popErrors" data-rel="dialog" data-transition="pop">Open Errors</a>
 			</form>
 			<nav>
 		<!-- Clear Stored Data Link -->
 				<a href="#" id="clearData" data-role="none" Data-ajax="false">Clear Local Data</a> 
 		<!-- Display Data Link -->
-				<a href="#dispData" id="displayData" data-role="none" Data-ajax="false">Display Data</a>
-		<!-- Add New Date Link -->
-				<a href="#addItem" id="addNew" style="display:none;" data-role="none" Data-ajax="false">Add New Date</a>
+				<a href="#" id="displayData" data-role="none" Data-ajax="false">Display Data</a>
 			</nav>
 		
-		
-		
+		<!-- Start of navbar -->
 			<section data-role="footer" data-position="fixed" data-id="index" data-theme="a">
 				<section data-role="navbar">
 					<ul>
-						<li><a href="#settings" id="settings" Data-ajax="false">Settings</a></li>
+						<li><a href="#settingsPage" id="settings" Data-ajax="false">Settings</a></li>
 						<li><a href="index.html" Data-ajax="false">Home</a></li>
 						<li><a href="#error404" Data-ajax="false">Search</a></li>
 					</ul>
 				</section>
 			</section>
+		<!-- End of navbar -->
 		</section>
 	<!-- End of addItem -->
+	
+	<!-- Start of formErrors -->
+		<div data-role="dialog" id="formErrors">
+			<div data-role="header" data-position="fixed">
+				<h1>Missing fields.</h1>
+			</div>
+			<div data-role="content">
+				<p>These fields are required.</p>
+				<ul>
+					<li>Test.</li>
+				</ul>
+			</div>
+		</div>
+	<!-- End of formErrors -->
 	
 	<!-- Start of dispData -->
 		<section data-role="page" id="dispData">
 			<h1><img src="img/Logo.jpg"></img></h1>
-		
-		
+				
 			<nav id="dispAdd">
 		<!-- Add New Date Link -->
-				<a href="#addItem" id="addNew" data-role="none" Data-ajax="false">Add New Date</a>
+				<a href="#" id="addNew" data-role="none" Data-ajax="false">Add New Date</a>
 			</nav>
+		<!-- Start of navbar -->
 			<section data-role="footer" data-position="fixed" data-id="index" data-theme="a">
 				<section data-role="navbar">
 					<ul>
-						<li><a href="#settings" id="settings" Data-ajax="false">Settings</a></li>
+						<li><a href="#settingsPage" id="settings" Data-ajax="false">Settings</a></li>
 						<li><a href="index.html" Data-ajax="false">Home</a></li>
 						<li><a href="#error404" Data-ajax="false">Search</a></li>
 					</ul>
 				</section>
 			</section>
+		<!-- End of navbar -->
 		</section>
 	<!-- End of dispData -->
 	
-	<!-- Start of settings -->
-		<section data-role="page" id="settings">
+	<!-- Start of settingsPage -->
+		<section data-role="page" id="settingsPage">
 			<h1><img src="img/Logo.jpg"></img></h1>
+				<form action="#" method="post" id="settingsForm"/>
+					<fieldset id="settingsField" data-role="none">
+					<legend>Settings</legend>
+					<ul data-role="content">
+					<!-- Flip switch to turn Alerts on or off --> 
+						<li><label for="alertFlip">Alerts:</label>
+							<select name="alertFlip" id="alertFlip" data-role="slider">
+								<option value="On">On</option>
+								<option value="Off" class="checked">Off</option>
+							</select>
+						</li>
+					<!-- Flip switch to turn Autosync with calendar on or off --> 
+						<li><label for="autosyncFlip">Calendar auto-sync:</label>
+							<select name="autosyncFlip" id="autosyncFlip" data-role="slider">
+								<option value="On">On</option>
+								<option value="Off" class="checked">Off</option>
+							</select>
+						</li>
+					<!-- Flip switch to turn Icon on or off --> 
+						<li><label for="iconFlip">Include Icons with saved dates?:</label>
+							<select name="iconFlip" id="iconFlip" data-role="slider">
+								<option value="Yes">Yes</option>
+								<option value="No">No</option>
+							</select> 
+						</li>
+					</ul>
+					</fieldset>
+				</form>
 			
-			
+		<!-- Start of navbar -->	
 			<section data-role="footer" data-position="fixed" data-id="index" data-theme="a">
 				<section data-role="navbar">
 					<ul>
-						<li><a href="#settings" id="settings" Data-ajax="false">Settings</a></li>
+						<li><a href="#settingsPage" id="settings" Data-ajax="false">Settings</a></li>
 						<li><a href="index.html" Data-ajax="false">Home</a></li>
 						<li><a href="#error404" Data-ajax="false">Search</a></li>
 					</ul>
 				</section>
 			</section>
+		<!-- End of navbar -->
 		</section>
-	<!-- End of settings -->
+	<!-- End of settingsPage -->
 	
 	<!-- Start of error404 -->
 		<section data-role="page" id="error404">
@@ -185,15 +221,17 @@
 			<nav>
 				<a href="#index" id="home">Click here to return home</a>
 			</nav>
+		<!-- Start of navbar -->
 			<section data-role="footer" data-position="fixed" data-id="index" data-theme="a">
 				<section data-role="navbar">
 					<ul>
-						<li><a href="#settings" id="settings" Data-ajax="false">Settings</a></li>
+						<li><a href="#settingsPage" id="settings" Data-ajax="false">Settings</a></li>
 						<li><a href="index.html" Data-ajax="false">Home</a></li>
 						<li><a href="#error404" Data-ajax="false">Search</a></li>
 					</ul>
 				</section>
 			</section>
+		<!-- End of navbar -->
 		</section>
 	<!-- End of error404 -->
 	
