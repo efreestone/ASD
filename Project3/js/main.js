@@ -202,8 +202,8 @@ function showData() {
         var linksLi = $("<ul></ul>");
         var key = localStorage.key(i);
         var value = localStorage.getItem(key);
-    //Convert the string from local storage value back to an object by using JSON.parse()
-        var obj = JSON.parse(value);
+    //Convert the string from local storage value back to an object by using .parseJSON()
+        var obj = $.parseJSON(value);
         var makeSubList = $("<ul></ul>");
         $(makeDiv).append(makeSubList);
     getImage(obj.events[1], makeSubList);
