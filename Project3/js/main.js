@@ -195,24 +195,24 @@ function showData() {
     	autofillData();
     }
     //Write Data from Local Storage to the browser.
-    var makeDiv = document.createElement("div");
-    makeDiv.setAttribute("id", "items");
+    var makeDiv = $("<div></div>");
+    $(makeDiv).attr("id", "items");
     $("#dispData").append(makeDiv);
     for(var i=0, len=localStorage.length; i<len; i++) {
-        var linksLi = document.createElement("ul");
+        var linksLi = $("<ul></ul>");
         var key = localStorage.key(i);
         var value = localStorage.getItem(key);
     //Convert the string from local storage value back to an object by using JSON.parse()
         var obj = JSON.parse(value);
-        var makeSubList = document.createElement("ul");
-        makeDiv.appendChild(makeSubList);
+        var makeSubList = $("<ul></ul>");
+        $(makeDiv).append(makeSubList);
     getImage(obj.events[1], makeSubList);
         for(var n in obj) {
-            var makeSubLi = document.createElement("li");
-            makeSubList.appendChild(makeSubLi);
+            var makeSubLi = $("<li></li>");
+            $(makeSubList).append(makeSubLi);
             var optSubText = obj[n][0]+" "+obj[n][1];
-            makeSubLi.innerHTML = optSubText;
-            makeSubList.appendChild(linksLi);
+            $(makeSubLi).html(optSubText);
+            $(makeSubList).append(linksLi);
         }
         makeItemLinks(localStorage.key(i), linksLi); //Create edit and delete buttons/link for each item in local storage
     }
@@ -220,11 +220,11 @@ function showData() {
 
 //Get and apply the image for the correct event category.
 function getImage(catName, makeSubList) {
-	var imageLi = document.createElement("li");
-	makeSubList.appendChild(imageLi);
-	var newImg = document.createElement("img");
-	var setSrc = newImg.setAttribute("src", "img/"+ catName +".jpg");
-	imageLi.appendChild(newImg);
+	var imageLi = $("<li></li>");
+	$(makeSubList).append(imageLi);
+	var newImg = $("<img></img>");
+	var setSrc = $(newImg).attr("src", "img/"+ catName +".jpg");
+	$(imageLi).append(newImg);
 };
 
 //Create the edit and delete links for each stored item when displayed
