@@ -48,7 +48,7 @@ $("#index").on("pageinit", function() {
 							evdate = $(this).contents("evdate").text();
 							evinfo = $(this).contents("evinfo").text();
 							attend = $(this).contents("attend").text();
-							details = $(this).contents("details").text()
+							details = $(this).contents("details").text();
 									
 							$("<ul id='myDisp' data-role='listview'>" + 
 								"<li>" + events + "</li>" +
@@ -60,6 +60,10 @@ $("#index").on("pageinit", function() {
 				});
 			}
 		});	
+	});
+	
+	$("#couch").on("click", function() {
+		$.mobile.changePage($("#couchLinks"));
 	});
 	
 }); //End of index pageinit	
@@ -93,6 +97,183 @@ $("#addItem").on("pageinit", function() {
 $("#dispData").on("pageinit", function() {
 	//Code needed for dispData goes here
 }); //End of dispData pageinit
+
+$("#couchLinks").on("pageinit", function() {
+
+	//Function to browse Anniversary CouchDB dummy data
+	$("#annButton").on("click", function() {
+		$.mobile.changePage($("#dispData"));
+		
+		$.ajax({
+			url: "_view/anniversary",
+			type: "GET",
+			dataType: "json",
+			success: function(data) {
+				alert("Here's Couch Anniversary!");
+					$.each(data.rows, function(index, anniversary){
+						var events = anniversary.value.events;
+							evdate = anniversary.value.evdate;
+							evinfo = anniversary.value.evinfo;
+							attend = anniversary.value.attend;
+							details = anniversary.value.details;
+									
+							$("<ul id='myDisp' data-role='listview'>" + 
+								"<li>" + events + "</li>" +
+								"<li>" + evdate + "</li>" +
+								"<li>" + evinfo + "</li>" +
+								"<li>" + attend + "</li>" +
+								"<li>" + details + "</li>" +
+								"</ul>").appendTo("#dispData");
+				});
+			}
+		});	
+	});
+	
+	//Function to browse Appointment CouchDB dummy data
+	$("#appButton").on("click", function() {
+		$.mobile.changePage($("#dispData"));
+		
+		$.ajax({
+			url: "_view/appointment",
+			type: "GET",
+			dataType: "json",
+			success: function(data) {
+				alert("Here's Couch Appointment!");
+					$.each(data.rows, function(index, appointment){
+						var events = appointment.value.events;
+							evdate = appointment.value.evdate;
+							evinfo = appointment.value.evinfo;
+							attend = appointment.value.attend;
+							details = appointment.value.details;
+									
+							$("<ul id='myDisp' data-role='listview'>" + 
+								"<li>" + events + "</li>" +
+								"<li>" + evdate + "</li>" +
+								"<li>" + evinfo + "</li>" +
+								"<li>" + attend + "</li>" +
+								"<li>" + details + "</li>" +
+								"</ul>").appendTo("#dispData");
+				});
+			}
+		});	
+	});
+	
+	//Function to browse Birthday CouchDB dummy data
+	$("#birButton").on("click", function() {
+		$.mobile.changePage($("#dispData"));
+		
+		$.ajax({
+			url: "_view/birthday",
+			type: "GET",
+			dataType: "json",
+			success: function(data) {
+				alert("Here's Couch Birthday!");
+					$.each(data.rows, function(index, birthday){
+						var events = birthday.value.events;
+							evdate = birthday.value.evdate;
+							evinfo = birthday.value.evinfo;
+							attend = birthday.value.attend;
+							details = birthday.value.details;
+									
+							$("<ul id='myDisp' data-role='listview'>" + 
+								"<li>" + events + "</li>" +
+								"<li>" + evdate + "</li>" +
+								"<li>" + evinfo + "</li>" +
+								"<li>" + attend + "</li>" +
+								"<li>" + details + "</li>" +
+								"</ul>").appendTo("#dispData");
+				});
+			}
+		});	
+	});
+	
+	//Function to browse Meeting CouchDB dummy data
+	$("#meeButton").on("click", function() {
+		$.mobile.changePage($("#dispData"));
+		
+		$.ajax({
+			url: "_view/meeting",
+			type: "GET",
+			dataType: "json",
+			success: function(data) {
+				alert("Here's Couch Meeting!");
+					$.each(data.rows, function(index, meeting){
+						var events = meeting.value.events;
+							evdate = meeting.value.evdate;
+							evinfo = meeting.value.evinfo;
+							attend = meeting.value.attend;
+							details = meeting.value.details;
+									
+							$("<ul id='myDisp' data-role='listview'>" + 
+								"<li>" + events + "</li>" +
+								"<li>" + evdate + "</li>" +
+								"<li>" + evinfo + "</li>" +
+								"<li>" + attend + "</li>" +
+								"<li>" + details + "</li>" +
+								"</ul>").appendTo("#dispData");
+				});
+			}
+		});	
+	});
+	
+	//Function to browse Other CouchDB dummy data
+	$("#othButton").on("click", function() {
+		$.mobile.changePage($("#dispData"));
+		
+		$.ajax({
+			url: "_view/other",
+			type: "GET",
+			dataType: "json",
+			success: function(data) {
+				alert("Here's Couch Other!");
+					$.each(data.rows, function(index, other){
+						var events = other.value.events;
+							evdate = other.value.evdate;
+							evinfo = other.value.evinfo;
+							attend = other.value.attend;
+							details = other.value.details;
+									
+							$("<ul id='myDisp' data-role='listview'>" + 
+								"<li>" + events + "</li>" +
+								"<li>" + evdate + "</li>" +
+								"<li>" + evinfo + "</li>" +
+								"<li>" + attend + "</li>" +
+								"<li>" + details + "</li>" +
+								"</ul>").appendTo("#dispData");
+				});
+			}
+		});	
+	});
+	
+	//Function to browse All CouchDB dummy data
+	$("#allButton").on("click", function() {
+		$.mobile.changePage($("#dispData"));
+		
+		$.ajax({
+			url: "_view/all",
+			type: "GET",
+			dataType: "json",
+			success: function(data) {
+				alert("Here's All Couch!");
+					$.each(data.rows, function(index, all){
+						var events = all.value.events;
+							evdate = all.value.evdate;
+							evinfo = all.value.evinfo;
+							attend = all.value.attend;
+							details = all.value.details;
+									
+							$("<ul id='myDisp' data-role='listview'>" + 
+								"<li>" + events + "</li>" +
+								"<li>" + evdate + "</li>" +
+								"<li>" + evinfo + "</li>" +
+								"<li>" + attend + "</li>" +
+								"<li>" + details + "</li>" +
+								"</ul>").appendTo("#dispData");
+				});
+			}
+		});	
+	});
+}); //End of couchLinks pageinit
 
 $("#error404").on("pageinit", function() {
 	//Code needed for error404 goes here
