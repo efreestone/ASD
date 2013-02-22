@@ -12,7 +12,7 @@ $("#index").on("pageinit", function() {
 		$.mobile.changePage($("#dispData"));
 		
 		$.ajax({
-			url: "js/data.json",
+			url: "data.json",
 			type: "GET",
 			dataType: "json",
 			success: function(data) {
@@ -38,7 +38,7 @@ $("#index").on("pageinit", function() {
 		$.mobile.changePage($("#dispData"));
 		
 		$.ajax({
-			url: "js/data.xml",
+			url: "data.xml",
 			type: "GET",
 			dataType: "xml",
 			success: function(data) {
