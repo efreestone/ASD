@@ -403,7 +403,7 @@ function getImage(catName, makeSubList) {
 	var imageLi = $("<li></li>");
 	$(makeSubList).append(imageLi);
 	var newImg = $("<img></img>");
-	var setSrc = $(newImg).attr("src", "img/"+ catName +".jpg");
+	var setSrc = $(newImg).attr("src", catName +".jpg");
 	$(imageLi).append(newImg);
 };
 
