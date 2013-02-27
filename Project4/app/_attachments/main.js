@@ -104,10 +104,7 @@ $("#couchLinks").on("pageinit", function() {
 	$("#annButton").on("click", function() {
 		$.mobile.changePage($("#dispData"));
 		
-		$.ajax({
-			url: "_view/anniversary",
-			type: "GET",
-			dataType: "json",
+		$.couch.db("project4").view("Save-a-date/anniversary", {
 			success: function(data) {
 				alert("Here's Couch Anniversary!");
 					$.each(data.rows, function(index, anniversary){
@@ -133,10 +130,7 @@ $("#couchLinks").on("pageinit", function() {
 	$("#appButton").on("click", function() {
 		$.mobile.changePage($("#dispData"));
 		
-		$.ajax({
-			url: "_view/appointment",
-			type: "GET",
-			dataType: "json",
+		$.couch.db("project4").view("Save-a-date/appointment", {
 			success: function(data) {
 				alert("Here's Couch Appointment!");
 					$.each(data.rows, function(index, appointment){
@@ -162,10 +156,7 @@ $("#couchLinks").on("pageinit", function() {
 	$("#birButton").on("click", function() {
 		$.mobile.changePage($("#dispData"));
 		
-		$.ajax({
-			url: "_view/birthday",
-			type: "GET",
-			dataType: "json",
+		$.couch.db("project4").view("Save-a-date/birthday", {
 			success: function(data) {
 				alert("Here's Couch Birthday!");
 					$.each(data.rows, function(index, birthday){
@@ -191,10 +182,7 @@ $("#couchLinks").on("pageinit", function() {
 	$("#meeButton").on("click", function() {
 		$.mobile.changePage($("#dispData"));
 		
-		$.ajax({
-			url: "_view/meeting",
-			type: "GET",
-			dataType: "json",
+		$.couch.db("project4").view("Save-a-date/meeting", {
 			success: function(data) {
 				alert("Here's Couch Meeting!");
 					$.each(data.rows, function(index, meeting){
@@ -220,10 +208,7 @@ $("#couchLinks").on("pageinit", function() {
 	$("#othButton").on("click", function() {
 		$.mobile.changePage($("#dispData"));
 		
-		$.ajax({
-			url: "_view/other",
-			type: "GET",
-			dataType: "json",
+		$.couch.db("project4").view("Save-a-date/other", {
 			success: function(data) {
 				alert("Here's Couch Other!");
 					$.each(data.rows, function(index, other){
@@ -249,27 +234,33 @@ $("#couchLinks").on("pageinit", function() {
 	$("#allButton").on("click", function() {
 		$.mobile.changePage($("#dispData"));
 		
-		$.ajax({
-			url: "_view/all",
-			type: "GET",
-			dataType: "json",
+		$.couch.db("project4").view("Save-a-date/all", {
 			success: function(data) {
 				alert("Here's All Couch!");
+				//var id = $.each(data.rows, function(index, all){all.value.id;});
 					$.each(data.rows, function(index, all){
-						var events = all.value.events;
+						var key = all.value.key;
+							events = all.value.events;
 							evdate = all.value.evdate;
 							evinfo = all.value.evinfo;
 							attend = all.value.attend;
 							details = all.value.details;
+							
+							console.log(key);
 									
 							$("<ul id='myDisp' data-role='listview'>" + 
+								//"<ul id='icon'>" + "</ul>" +
 								"<li>" + events + "</li>" +
 								"<li>" + evdate + "</li>" +
 								"<li>" + evinfo + "</li>" +
 								"<li>" + attend + "</li>" +
 								"<li>" + details + "</li>" +
-								"</ul>").appendTo("#dispData");
+								"<ul id='links'>" + "</ul>" +
+								"</ul>").appendTo("#dispData");	
+								return key;		
 				});
+				//console.log(key);
+				makeItemLinks("key", links);
 			}
 		});	
 	});
@@ -379,7 +370,7 @@ function showData() {
     $(makeDiv).attr("id", "items");
     $("#dispData").append(makeDiv);
     for(var i=0, len=localStorage.length; i<len; i++) {
-        var linksLi = $("<ul></ul>");
+        var links = $("<ul></ul>");
         var key = localStorage.key(i);
         var value = localStorage.getItem(key);
     //Convert the string from local storage value back to an object by using .parseJSON()
@@ -392,9 +383,9 @@ function showData() {
             $(makeSubList).append(makeSubLi);
             var optSubText = obj[n][0]+" "+obj[n][1];
             $(makeSubLi).html(optSubText);
-            $(makeSubList).append(linksLi);
+            $(makeSubList).append(links);
         }
-        makeItemLinks(localStorage.key(i), linksLi); //Create edit and delete buttons/link for each item in local storage
+        makeItemLinks(localStorage.key(i), links); //Create edit and delete buttons/link for each item in local storage
     }
 };
 
@@ -408,18 +399,18 @@ function getImage(catName, makeSubList) {
 };
 
 //Create the edit and delete links for each stored item when displayed
-function makeItemLinks(key, linksLi) {
+function makeItemLinks(key, links) {
 	var editLink = $("<a></a>").attr({"href": "#", "id": "editLink", "key": key })
 							   .html("Edit Date")
-							   .appendTo(linksLi)
+							   .appendTo(links)
 							   .on("click", editItem);
 	
     //Add line break
-    var breakTag = $("</br>").appendTo(linksLi);
+    var breakTag = $("</br>").appendTo(links);
     
     var deleteLink = $("<a></a>").attr({"href": "#", "id": "deleteLink", "key": key })
     							 .html("Delete Date")
-    							 .appendTo(linksLi)
+    							 .appendTo(links)
     							 .on("click", deleteItem);    
 };
 
