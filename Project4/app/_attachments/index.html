@@ -54,7 +54,7 @@
 					<ul>
 						<li><a href="#settingsPage" id="settings" Data-ajax="false">Settings</a></li>
 						<li><a href="index.html" Data-ajax="false">Home</a></li>
-						<li><a href="#error404" Data-ajax="false">Search</a></li>
+						<li><a href="#couchLinks" Data-ajax="false">Browse</a></li>
 					</ul>
 				</section>
 			</section>
@@ -72,8 +72,8 @@
 				<ul id="errors"></ul>
 				<ul data-role="content">
 		<!-- Type of Event -->
-					<li><label for="eventType">*Type of Event:</label>
-						<select data-mini="true" name="eventType" id="eventType"  class="required">
+					<li><label for="events">*Type of Event:</label>
+						<select data-mini="true" name="events" id="events"  class="required">
 							<option value="" data-placeholder="true">--Choose An Event Type--</option>
 							<option value="Anniversary">Anniversary</option>
 							<option value="Appointment">Appointment</option>
@@ -83,12 +83,12 @@
 						</select>
 					</li>
 		<!-- Date of Event -->
-					<li><label for="evDate">*Event Date:</label>
-						<input type="date" name="evDate" id="evDate" value="" class="required"/>
+					<li><label for="evdate">*Event Date:</label>
+						<input type="date" name="evdate" id="evdate" value="" class="required"/>
 					</li>
 		<!-- Event Description -->
-					<li><label for="evInfo">*Event Information:</label>
-						<input data-mini="true" type="text" name="evInfo" id="evInfo" value="" placeholder="Dads birthday, etc." class="required"/>
+					<li><label for="evinfo">*Event Information:</label>
+						<input data-mini="true" type="text" name="evinfo" id="evinfo" value="" placeholder="Dads birthday, etc." class="required"/>
 					</li>
 		<!-- Attendance required?  -->
 					<li><label for="attendance">Is Attendance Required?</label>
@@ -108,7 +108,7 @@
 					<input type="hidden" value="true"/>
 				</fieldset>
 		<!-- Submit Button -->	
-				<input type="submit" value="Save Date!" id="submit" data-role="none" Data-ajax="false"/>
+				<input type="submit" value="Save Date!" id="submit" data-role="none" Data-ajax="true"/>
 		<!-- Reset Form Button -->
 				<input type="reset" value="Reset Form" id="reset" data-icon="delete" data-mini="true" data-inline="true" data-role="none"/>
 		<!-- Validation error pop-up -->
@@ -127,7 +127,7 @@
 					<ul>
 						<li><a href="#settingsPage" id="settings" Data-ajax="false">Settings</a></li>
 						<li><a href="index.html" Data-ajax="false">Home</a></li>
-						<li><a href="#error404" Data-ajax="false">Search</a></li>
+						<li><a href="#couchLinks" Data-ajax="false">Browse</a></li>
 					</ul>
 				</section>
 			</section>
@@ -157,13 +157,16 @@
 		<!-- Add New Date Link -->
 				<a href="#" id="addNew" data-role="none" Data-ajax="false">Add New Date</a>
 			</nav>
+		<!-- div to display couch docs to fix cache issue -->
+			<div data-role="content" id="couchDisp"></div>
+			
 		<!-- Start of navbar -->
 			<section data-role="footer" data-position="fixed" data-id="index" data-theme="a">
 				<section data-role="navbar">
 					<ul>
 						<li><a href="#settingsPage" id="settings" Data-ajax="false">Settings</a></li>
 						<li><a href="index.html" Data-ajax="false">Home</a></li>
-						<li><a href="#error404" Data-ajax="false">Search</a></li>
+						<li><a href="#couchLinks" Data-ajax="false">Browse</a></li>
 					</ul>
 				</section>
 			</section>
@@ -209,7 +212,7 @@
 					<ul>
 						<li><a href="#settingsPage" id="settings" Data-ajax="false">Settings</a></li>
 						<li><a href="index.html" Data-ajax="false">Home</a></li>
-						<li><a href="#error404" Data-ajax="false">Search</a></li>
+						<li><a href="#couchLinks" Data-ajax="false">Browse</a></li>
 					</ul>
 				</section>
 			</section>
@@ -231,7 +234,7 @@
 					<ul>
 						<li><a href="#settingsPage" id="settings" Data-ajax="false">Settings</a></li>
 						<li><a href="index.html" Data-ajax="false">Home</a></li>
-						<li><a href="#error404" Data-ajax="false">Search</a></li>
+						<li><a href="#couchLinks" Data-ajax="false">Browse</a></li>
 					</ul>
 				</section>
 			</section>
@@ -280,7 +283,7 @@
 					<ul>
 						<li><a href="#settingsPage" id="settings" Data-ajax="false">Settings</a></li>
 						<li><a href="index.html" Data-ajax="false">Home</a></li>
-						<li><a href="#error404" Data-ajax="false">Search</a></li>
+						<li><a href="#couchLinks" Data-ajax="false">Browse</a></li>
 					</ul>
 				</section>
 			</section>
@@ -295,6 +298,7 @@
 	<script type="text/javascript" src="jquery-1.8.3.js"></script>
 	<script type="text/javascript" src="jquery.mobile-1.2.0.js"></script>
 	<script type="text/javascript" src="jquery.validate.min.js"></script>
+	<script type="text/javascript" src="jquery.couch.js"></script>
 	<script type="text/javascript" src="json.js"></script>
 	<script type="text/javascript" src="main.js"></script>
 	

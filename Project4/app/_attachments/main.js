@@ -103,11 +103,9 @@ $("#couchLinks").on("pageinit", function() {
 	//Function to browse Anniversary CouchDB dummy data
 	$("#annButton").on("click", function() {
 		$.mobile.changePage($("#dispData"));
+		$("#couchDisp").empty();
 		
-		$.ajax({
-			url: "_view/anniversary",
-			type: "GET",
-			dataType: "json",
+		$.couch.db("project4").view("Save-a-date/anniversary", {
 			success: function(data) {
 				alert("Here's Couch Anniversary!");
 					$.each(data.rows, function(index, anniversary){
@@ -117,26 +115,39 @@ $("#couchLinks").on("pageinit", function() {
 							attend = anniversary.value.attend;
 							details = anniversary.value.details;
 									
-							$("<ul id='myDisp' data-role='listview'>" + 
-								"<li>" + events + "</li>" +
-								"<li>" + evdate + "</li>" +
-								"<li>" + evinfo + "</li>" +
-								"<li>" + attend + "</li>" +
-								"<li>" + details + "</li>" +
-								"</ul>").appendTo("#dispData");
-				});
+							$("#couchDisp").append(
+								$("<ul data-role='listview' id='myDisp'>").append(
+									$("<li>" + events + "</li>" +
+									"<li>" + evdate + "</li>" +
+									"<li>" + evinfo + "</li>" +
+									"<li>" + attend + "</li>" +
+									"<li>" + details + "</li>" + "</ul>"
+									)
+								).append($("<a>")
+								.attr({
+									"href": "#",
+									"id": "edit",
+									"key": anniversary.id})
+								.html("Edit Date").on("click", editItem)
+								).append("<br>")
+								.append($("<a>").attr({
+									"href": "#",
+									"id": "delete",
+									"key": anniversary.id})
+								.html('Delete Date').on('click', deleteItem)
+								)							
+							);		
+				})
 			}
-		});	
-	});
+		});
+	});	
 	
 	//Function to browse Appointment CouchDB dummy data
 	$("#appButton").on("click", function() {
 		$.mobile.changePage($("#dispData"));
+		$("#couchDisp").empty();
 		
-		$.ajax({
-			url: "_view/appointment",
-			type: "GET",
-			dataType: "json",
+		$.couch.db("project4").view("Save-a-date/appointment", {
 			success: function(data) {
 				alert("Here's Couch Appointment!");
 					$.each(data.rows, function(index, appointment){
@@ -146,26 +157,39 @@ $("#couchLinks").on("pageinit", function() {
 							attend = appointment.value.attend;
 							details = appointment.value.details;
 									
-							$("<ul id='myDisp' data-role='listview'>" + 
-								"<li>" + events + "</li>" +
-								"<li>" + evdate + "</li>" +
-								"<li>" + evinfo + "</li>" +
-								"<li>" + attend + "</li>" +
-								"<li>" + details + "</li>" +
-								"</ul>").appendTo("#dispData");
-				});
+							$("#couchDisp").append(
+								$("<ul data-role='listview' id='myDisp'>").append(
+									$("<li>" + events + "</li>" +
+									"<li>" + evdate + "</li>" +
+									"<li>" + evinfo + "</li>" +
+									"<li>" + attend + "</li>" +
+									"<li>" + details + "</li>" + "</ul>"
+									)
+								).append($("<a>")
+								.attr({
+									"href": "#",
+									"id": "edit",
+									"key": appointment.id})
+								.html("Edit Date").on("click", editItem)
+								).append("<br>")
+								.append($("<a>").attr({
+									"href": "#",
+									"id": "delete",
+									"key": appointment.id})
+								.html('Delete Date').on('click', deleteItem)
+								)							
+							);		
+				})
 			}
-		});	
-	});
-	
+		});
+	});	
+		
 	//Function to browse Birthday CouchDB dummy data
 	$("#birButton").on("click", function() {
 		$.mobile.changePage($("#dispData"));
+		$("#couchDisp").empty();
 		
-		$.ajax({
-			url: "_view/birthday",
-			type: "GET",
-			dataType: "json",
+		$.couch.db("project4").view("Save-a-date/birthday", {
 			success: function(data) {
 				alert("Here's Couch Birthday!");
 					$.each(data.rows, function(index, birthday){
@@ -175,26 +199,39 @@ $("#couchLinks").on("pageinit", function() {
 							attend = birthday.value.attend;
 							details = birthday.value.details;
 									
-							$("<ul id='myDisp' data-role='listview'>" + 
-								"<li>" + events + "</li>" +
-								"<li>" + evdate + "</li>" +
-								"<li>" + evinfo + "</li>" +
-								"<li>" + attend + "</li>" +
-								"<li>" + details + "</li>" +
-								"</ul>").appendTo("#dispData");
-				});
+							$("#couchDisp").append(
+								$("<ul data-role='listview' id='myDisp'>").append(
+									$("<li>" + events + "</li>" +
+									"<li>" + evdate + "</li>" +
+									"<li>" + evinfo + "</li>" +
+									"<li>" + attend + "</li>" +
+									"<li>" + details + "</li>" + "</ul>"
+									)
+								).append($("<a>")
+								.attr({
+									"href": "#",
+									"id": "edit",
+									"key": birthday.id})
+								.html("Edit Date").on("click", editItem)
+								).append("<br>")
+								.append($("<a>").attr({
+									"href": "#",
+									"id": "delete",
+									"key": birthday.id})
+								.html('Delete Date').on('click', deleteItem)
+								)							
+							);		
+				})
 			}
-		});	
-	});
-	
+		});
+	});	
+		
 	//Function to browse Meeting CouchDB dummy data
 	$("#meeButton").on("click", function() {
 		$.mobile.changePage($("#dispData"));
+		$("#couchDisp").empty();
 		
-		$.ajax({
-			url: "_view/meeting",
-			type: "GET",
-			dataType: "json",
+		$.couch.db("project4").view("Save-a-date/meeting", {
 			success: function(data) {
 				alert("Here's Couch Meeting!");
 					$.each(data.rows, function(index, meeting){
@@ -204,26 +241,39 @@ $("#couchLinks").on("pageinit", function() {
 							attend = meeting.value.attend;
 							details = meeting.value.details;
 									
-							$("<ul id='myDisp' data-role='listview'>" + 
-								"<li>" + events + "</li>" +
-								"<li>" + evdate + "</li>" +
-								"<li>" + evinfo + "</li>" +
-								"<li>" + attend + "</li>" +
-								"<li>" + details + "</li>" +
-								"</ul>").appendTo("#dispData");
-				});
+							$("#couchDisp").append(
+								$("<ul data-role='listview' id='myDisp'>").append(
+									$("<li>" + events + "</li>" +
+									"<li>" + evdate + "</li>" +
+									"<li>" + evinfo + "</li>" +
+									"<li>" + attend + "</li>" +
+									"<li>" + details + "</li>" + "</ul>"
+									)
+								).append($("<a>")
+								.attr({
+									"href": "#",
+									"id": "edit",
+									"key": meeting.id})
+								.html("Edit Date").on("click", editItem)
+								).append("<br>")
+								.append($("<a>").attr({
+									"href": "#",
+									"id": "delete",
+									"key": meeting.id})
+								.html('Delete Date').on('click', deleteItem)
+								)							
+							);		
+				})
 			}
-		});	
-	});
+		});
+	});	
 	
 	//Function to browse Other CouchDB dummy data
 	$("#othButton").on("click", function() {
 		$.mobile.changePage($("#dispData"));
+		$("#couchDisp").empty();
 		
-		$.ajax({
-			url: "_view/other",
-			type: "GET",
-			dataType: "json",
+		$.couch.db("project4").view("Save-a-date/other", {
 			success: function(data) {
 				alert("Here's Couch Other!");
 					$.each(data.rows, function(index, other){
@@ -233,46 +283,75 @@ $("#couchLinks").on("pageinit", function() {
 							attend = other.value.attend;
 							details = other.value.details;
 									
-							$("<ul id='myDisp' data-role='listview'>" + 
-								"<li>" + events + "</li>" +
-								"<li>" + evdate + "</li>" +
-								"<li>" + evinfo + "</li>" +
-								"<li>" + attend + "</li>" +
-								"<li>" + details + "</li>" +
-								"</ul>").appendTo("#dispData");
-				});
+							$("#couchDisp").append(
+								$("<ul data-role='listview' id='myDisp'>").append(
+									$("<li>" + events + "</li>" +
+									"<li>" + evdate + "</li>" +
+									"<li>" + evinfo + "</li>" +
+									"<li>" + attend + "</li>" +
+									"<li>" + details + "</li>" + "</ul>"
+									)
+								).append($("<a>")
+								.attr({
+									"href": "#",
+									"id": "edit",
+									"key": other.id})
+								.html("Edit Date").on("click", editItem)
+								).append("<br>")
+								.append($("<a>").attr({
+									"href": "#",
+									"id": "delete",
+									"key": other.id})
+								.html('Delete Date').on('click', deleteItem)
+								)							
+							);		
+				})
 			}
-		});	
-	});
-	
+		});
+	});	
+		
 	//Function to browse All CouchDB dummy data
 	$("#allButton").on("click", function() {
 		$.mobile.changePage($("#dispData"));
+		$("#couchDisp").empty();
 		
-		$.ajax({
-			url: "_view/all",
-			type: "GET",
-			dataType: "json",
+		$.couch.db("project4").view("Save-a-date/all", {
 			success: function(data) {
 				alert("Here's All Couch!");
 					$.each(data.rows, function(index, all){
-						var events = all.value.events;
+						var key = all.value._id;
+							events = all.value.events;
 							evdate = all.value.evdate;
 							evinfo = all.value.evinfo;
 							attend = all.value.attend;
 							details = all.value.details;
-									
-							$("<ul id='myDisp' data-role='listview'>" + 
-								"<li>" + events + "</li>" +
-								"<li>" + evdate + "</li>" +
-								"<li>" + evinfo + "</li>" +
-								"<li>" + attend + "</li>" +
-								"<li>" + details + "</li>" +
-								"</ul>").appendTo("#dispData");
-				});
+							
+							$("#couchDisp").append(
+								$("<ul data-role='listview' id='myDisp'>").append(
+									$("<li>" + events + "</li>" +
+									"<li>" + evdate + "</li>" +
+									"<li>" + evinfo + "</li>" +
+									"<li>" + attend + "</li>" +
+									"<li>" + details + "</li>" + "</ul>"
+									)
+								).append($("<a>")
+								.attr({
+									"href": "#",
+									"id": "edit",
+									"key": all.id})
+								.html("Edit Date").on("click", editItem)
+								).append("<br>")
+								.append($("<a>").attr({
+									"href": "#",
+									"id": "delete",
+									"key": all.id})
+								.html('Delete Date').on('click', deleteItem)
+								)							
+							);		
+				})
 			}
-		});	
-	});
+		});
+	});	
 }); //End of couchLinks pageinit
 
 $("#error404").on("pageinit", function() {
@@ -311,32 +390,40 @@ function attendCheck() {
 
 //Function to add key and save data to local storage
 function saveData(key) {
+	var item         = {};
 	//If there is no key, this means this is a brand new item and we need a new key.
-	if(!key) {
-		var id = Math.floor(Math.random()*100000001);
+	if(!key || undefined) {
+		var id = $("#events").val() + ":" + Math.floor(Math.random()*100000001);
 	}else{
 		//Set the id to the existing key that we're editing so it will save over the data.
 		//The key is the same key that has been passed along form the editSubmit handler
 		//to the validate function, and then passed here, into the storeData finction.
 		id = key;
+		item._rev = $("#submit").attr("rev");
 	}
     //Gather up all our form field values and store in an object.
     //Object properties contain array with the form label and input value.
     attendCheck();
     //console.log(attendReq);
-    var item         = {};
-        item.events  = ["Event:", $("#eventType").val()]; //Event type selector
-        item.evdate  = ["Date:", $("#evDate").val()]; //Event Date
-        item.evinfo  = ["Info:", $("#evInfo").val()]; //Event Info
-        item.attend  = ["Is attendance required?:", attendReq]; //Attendance Checkbox
-        item.details = ["Event Details:", $("#details").val()]; //Event Details
+    $("#submit").attr("key", id);
+    
+    	item._id	 = id;
+        item.events  = ["Event Type: ", $("#events").val()]; //Event type selector
+        item.evdate  = ["Date: ", $("#evdate").val()]; //Event Date
+        item.evinfo  = ["Info: ", $("#evinfo").val()]; //Event Info
+        item.attend  = ["Is attendance required?: ", attendReq]; //Attendance Checkbox
+        item.details = ["Event Details: ", $("#details").val()]; //Event Details
             
     //Save Data into Local Storage: Use Stringify to convert object to a string.
-    localStorage.setItem(id, JSON.stringify(item));
-        
+    $.couch.db("project4").saveDoc(item, {
+    	success: function(data) {    
     alert("Date Saved!");
     //console.log(id);
     window.location.reload();
+    }
+    });
+    $("#submit").removeAttr("key");
+    //window.location.reload();
 };
 
 //Clear all stored data
@@ -367,7 +454,7 @@ $("#addNew").on("click", function() {
 });
    
 //Function to display items from local storage 
-function showData() {
+/*function showData() {
 	$.mobile.changePage($("#dispData"));
     //Check if there are any items in local storage  
     if(localStorage.length === 0) {
@@ -379,7 +466,7 @@ function showData() {
     $(makeDiv).attr("id", "items");
     $("#dispData").append(makeDiv);
     for(var i=0, len=localStorage.length; i<len; i++) {
-        var linksLi = $("<ul></ul>");
+        var links = $("<ul></ul>");
         var key = localStorage.key(i);
         var value = localStorage.getItem(key);
     //Convert the string from local storage value back to an object by using .parseJSON()
@@ -392,11 +479,11 @@ function showData() {
             $(makeSubList).append(makeSubLi);
             var optSubText = obj[n][0]+" "+obj[n][1];
             $(makeSubLi).html(optSubText);
-            $(makeSubList).append(linksLi);
+            $(makeSubList).append(links);
         }
-        makeItemLinks(localStorage.key(i), linksLi); //Create edit and delete buttons/link for each item in local storage
+        makeItemLinks(localStorage.key(i), links); //Create edit and delete buttons/link for each item in local storage
     }
-};
+};*/
 
 //Get and apply the image for the correct event category.
 function getImage(catName, makeSubList) {
@@ -408,42 +495,49 @@ function getImage(catName, makeSubList) {
 };
 
 //Create the edit and delete links for each stored item when displayed
-function makeItemLinks(key, linksLi) {
+/*function makeItemLinks(key, links) {
 	var editLink = $("<a></a>").attr({"href": "#", "id": "editLink", "key": key })
 							   .html("Edit Date")
-							   .appendTo(linksLi)
+							   .appendTo(links)
 							   .on("click", editItem);
 	
     //Add line break
-    var breakTag = $("</br>").appendTo(linksLi);
+    var breakTag = $("</br>").appendTo(links);
     
     var deleteLink = $("<a></a>").attr({"href": "#", "id": "deleteLink", "key": key })
     							 .html("Delete Date")
-    							 .appendTo(linksLi)
-    							 .on("click", deleteItem);    
-};
+    							 .appendTo(links)
+    							 .on("click", deleteItem);
+    				return false;
+};*/
 
 //Function for edit item link
 function editItem() {
-	$.mobile.changePage($("#addItem"));
-	//Grab the data from our item from local storage
-	var value = localStorage.getItem($(this).attr("key"));
-	var item = $.parseJSON(value);    
+	//e.preventDefault();
 	
+	
+	//Grab the data from our item from local storage
+	$.couch.db('project4').openDoc($(this).attr('key'), {
+    		success: function(data) {   
 	//Populate the form fields with current localStorage values.
 	//[0] is the label. [1] is the value.
-	$("#eventType").val(item.events[1]);
-	$("#evDate").val(item.evdate[1]);
-	$("#evInfo").val(item.evinfo[1]);
-		if(item.attend[1] == "Yes") {
-			$("#attend").prop(":checked", true);
-		}
-	$("#details").val(item.details[1]);
+		$("#events").val(data.events[1]);
+		$("#evdate").val(data.evdate[1]);
+		$("#evinfo").val(data.evinfo[1]);
+			if(data.attend[1] == "Yes") {
+				$("#attend").prop(":checked", true);
+			}
+		$("#details").val(data.details[1]);
 	//Change text on save button
-	$('#submit').val("Edit Date");
-	$('#submit').attr("key", $(this).attr("key")); 
+		$("#submit").val("Edit Date")
+			.attr({"key": data._id, "rev": data._rev
+			});
+		}
+	});
+	$.mobile.changePage($("#addItem"));
+	return false; 
 };
-    
+
 //Delete single event 
 function deleteItem() {
 	
@@ -451,20 +545,24 @@ function deleteItem() {
 	
     var ask = confirm("Are you sure you want to delete this date?");
     if(ask) {
-    	localStorage.removeItem($(this).attr("key"));
-    	alert("You have successfully deleted the date!");
-    	
-    	//history.go(0);
-    	//showData();
-    	//$.mobile.changePage($("#dispData"));
-    	//window.opener.updateContent();
-    	//showData();
-	    //localStorage.removeItem(this.key);
-	    //alert("You have successfully deleted the date!")
-	    window.location.reload();
+    	$.couch.db("project4").openDoc($(this).attr("key"), {
+    		success: function(data) {
+	    		var item = {};
+	    		item._id = data._id;
+	    		item._rev = data._rev;
+	    		$.couch.db("project4").removeDoc(item, {	
+		    		success: function(data) {
+			    		alert("You have successfully deleted the date!");
+	    			}
+	    		});
+	    	}
+    	});
+	    
 	    //return false;
 	    
     }else{
 	    alert("Date was NOT deleted.")
     }
+    $.mobile.changePage("#couchLinks");
+    //window.location.reload();
 };
