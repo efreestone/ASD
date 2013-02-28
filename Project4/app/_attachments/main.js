@@ -157,7 +157,7 @@ $("#couchLinks").on("pageinit", function() {
 							attend = appointment.value.attend;
 							details = appointment.value.details;
 									
-							$("#dispData").append(
+							$("#couchDisp").append(
 								$("<ul data-role='listview' id='myDisp'>").append(
 									$("<li>" + events + "</li>" +
 									"<li>" + evdate + "</li>" +
@@ -199,7 +199,7 @@ $("#couchLinks").on("pageinit", function() {
 							attend = birthday.value.attend;
 							details = birthday.value.details;
 									
-							$("#dispData").append(
+							$("#couchDisp").append(
 								$("<ul data-role='listview' id='myDisp'>").append(
 									$("<li>" + events + "</li>" +
 									"<li>" + evdate + "</li>" +
@@ -241,7 +241,7 @@ $("#couchLinks").on("pageinit", function() {
 							attend = meeting.value.attend;
 							details = meeting.value.details;
 									
-							$("#dispData").append(
+							$("#couchDisp").append(
 								$("<ul data-role='listview' id='myDisp'>").append(
 									$("<li>" + events + "</li>" +
 									"<li>" + evdate + "</li>" +
@@ -283,7 +283,7 @@ $("#couchLinks").on("pageinit", function() {
 							attend = other.value.attend;
 							details = other.value.details;
 									
-							$("#dispData").append(
+							$("#couchDisp").append(
 								$("<ul data-role='listview' id='myDisp'>").append(
 									$("<li>" + events + "</li>" +
 									"<li>" + evdate + "</li>" +
@@ -326,7 +326,7 @@ $("#couchLinks").on("pageinit", function() {
 							attend = all.value.attend;
 							details = all.value.details;
 							
-							$("#dispData").append(
+							$("#couchDisp").append(
 								$("<ul data-role='listview' id='myDisp'>").append(
 									$("<li>" + events + "</li>" +
 									"<li>" + evdate + "</li>" +
@@ -390,32 +390,40 @@ function attendCheck() {
 
 //Function to add key and save data to local storage
 function saveData(key) {
+	var item         = {};
 	//If there is no key, this means this is a brand new item and we need a new key.
-	if(!key) {
-		var id = Math.floor(Math.random()*100000001);
+	if(!key || undefined) {
+		var id = $("#events").val() + ":" + Math.floor(Math.random()*100000001);
 	}else{
 		//Set the id to the existing key that we're editing so it will save over the data.
 		//The key is the same key that has been passed along form the editSubmit handler
 		//to the validate function, and then passed here, into the storeData finction.
 		id = key;
+		item._rev = $("#submit").attr("rev");
 	}
     //Gather up all our form field values and store in an object.
     //Object properties contain array with the form label and input value.
     attendCheck();
     //console.log(attendReq);
-    var item         = {};
-        item.events  = ["Event:", $("#eventType").val()]; //Event type selector
-        item.evdate  = ["Date:", $("#evDate").val()]; //Event Date
-        item.evinfo  = ["Info:", $("#evInfo").val()]; //Event Info
-        item.attend  = ["Is attendance required?:", attendReq]; //Attendance Checkbox
-        item.details = ["Event Details:", $("#details").val()]; //Event Details
+    $("#submit").attr("key", id);
+    
+    	item._id	 = id;
+        item.events  = ["Event Type: ", $("#events").val()]; //Event type selector
+        item.evdate  = ["Date: ", $("#evdate").val()]; //Event Date
+        item.evinfo  = ["Info: ", $("#evinfo").val()]; //Event Info
+        item.attend  = ["Is attendance required?: ", attendReq]; //Attendance Checkbox
+        item.details = ["Event Details: ", $("#details").val()]; //Event Details
             
     //Save Data into Local Storage: Use Stringify to convert object to a string.
-    localStorage.setItem(id, JSON.stringify(item));
-        
+    $.couch.db("project4").saveDoc(item, {
+    	success: function(data) {    
     alert("Date Saved!");
     //console.log(id);
     window.location.reload();
+    }
+    });
+    $("#submit").removeAttr("key");
+    //window.location.reload();
 };
 
 //Clear all stored data
@@ -446,7 +454,7 @@ $("#addNew").on("click", function() {
 });
    
 //Function to display items from local storage 
-function showData() {
+/*function showData() {
 	$.mobile.changePage($("#dispData"));
     //Check if there are any items in local storage  
     if(localStorage.length === 0) {
@@ -475,7 +483,7 @@ function showData() {
         }
         makeItemLinks(localStorage.key(i), links); //Create edit and delete buttons/link for each item in local storage
     }
-};
+};*/
 
 //Get and apply the image for the correct event category.
 function getImage(catName, makeSubList) {
@@ -505,25 +513,29 @@ function getImage(catName, makeSubList) {
 
 //Function for edit item link
 function editItem() {
-	$.mobile.changePage($("#addItem"));
+	//e.preventDefault();
+	
 	
 	//Grab the data from our item from local storage
-	$.couch.db("project4").openDoc($(this).attr("key"), {
+	$.couch.db('project4').openDoc($(this).attr('key'), {
     		success: function(data) {   
 	//Populate the form fields with current localStorage values.
 	//[0] is the label. [1] is the value.
-		$("#eventType").val(data.events[1]);
-		$("#evDate").val(data.evdate[1]);
-		$("#evInfo").val(data.evinfo[1]);
+		$("#events").val(data.events[1]);
+		$("#evdate").val(data.evdate[1]);
+		$("#evinfo").val(data.evinfo[1]);
 			if(data.attend[1] == "Yes") {
 				$("#attend").prop(":checked", true);
 			}
 		$("#details").val(data.details[1]);
 	//Change text on save button
-		$('#submit').val("Edit Date");
-		$('#submit').attr({"key": data._id, "rev": data._rev});
+		$("#submit").val("Edit Date")
+			.attr({"key": data._id, "rev": data._rev
+			});
 		}
-	}); 
+	});
+	$.mobile.changePage($("#addItem"));
+	return false; 
 };
 
 //Delete single event 
