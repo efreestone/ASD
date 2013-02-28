@@ -114,17 +114,32 @@ $("#couchLinks").on("pageinit", function() {
 							attend = anniversary.value.attend;
 							details = anniversary.value.details;
 									
-							$("<ul id='myDisp' data-role='listview'>" + 
-								"<li>" + events + "</li>" +
-								"<li>" + evdate + "</li>" +
-								"<li>" + evinfo + "</li>" +
-								"<li>" + attend + "</li>" +
-								"<li>" + details + "</li>" +
-								"</ul>").appendTo("#dispData");
-				});
+							$("#dispData").append(
+								$("<ul data-role='listview' id='myDisp'>").append(
+									$("<li>" + events + "</li>" +
+									"<li>" + evdate + "</li>" +
+									"<li>" + evinfo + "</li>" +
+									"<li>" + attend + "</li>" +
+									"<li>" + details + "</li>" + "</ul>"
+									)
+								).append($("<a>")
+								.attr({
+									"href": "#",
+									"id": "edit",
+									"key": anniversary.id})
+								.html("Edit Date").on("click", editItem)
+								).append("<br>")
+								.append($("<a>").attr({
+									"href": "#",
+									"id": "delete",
+									"key": anniversary.id})
+								.html('Delete Date').on('click', deleteItem)
+								)							
+							);		
+				})
 			}
-		});	
-	});
+		});
+	});	
 	
 	//Function to browse Appointment CouchDB dummy data
 	$("#appButton").on("click", function() {
@@ -140,18 +155,33 @@ $("#couchLinks").on("pageinit", function() {
 							attend = appointment.value.attend;
 							details = appointment.value.details;
 									
-							$("<ul id='myDisp' data-role='listview'>" + 
-								"<li>" + events + "</li>" +
-								"<li>" + evdate + "</li>" +
-								"<li>" + evinfo + "</li>" +
-								"<li>" + attend + "</li>" +
-								"<li>" + details + "</li>" +
-								"</ul>").appendTo("#dispData");
-				});
+							$("#dispData").append(
+								$("<ul data-role='listview' id='myDisp'>").append(
+									$("<li>" + events + "</li>" +
+									"<li>" + evdate + "</li>" +
+									"<li>" + evinfo + "</li>" +
+									"<li>" + attend + "</li>" +
+									"<li>" + details + "</li>" + "</ul>"
+									)
+								).append($("<a>")
+								.attr({
+									"href": "#",
+									"id": "edit",
+									"key": appointment.id})
+								.html("Edit Date").on("click", editItem)
+								).append("<br>")
+								.append($("<a>").attr({
+									"href": "#",
+									"id": "delete",
+									"key": appointment.id})
+								.html('Delete Date').on('click', deleteItem)
+								)							
+							);		
+				})
 			}
-		});	
-	});
-	
+		});
+	});	
+		
 	//Function to browse Birthday CouchDB dummy data
 	$("#birButton").on("click", function() {
 		$.mobile.changePage($("#dispData"));
@@ -166,18 +196,33 @@ $("#couchLinks").on("pageinit", function() {
 							attend = birthday.value.attend;
 							details = birthday.value.details;
 									
-							$("<ul id='myDisp' data-role='listview'>" + 
-								"<li>" + events + "</li>" +
-								"<li>" + evdate + "</li>" +
-								"<li>" + evinfo + "</li>" +
-								"<li>" + attend + "</li>" +
-								"<li>" + details + "</li>" +
-								"</ul>").appendTo("#dispData");
-				});
+							$("#dispData").append(
+								$("<ul data-role='listview' id='myDisp'>").append(
+									$("<li>" + events + "</li>" +
+									"<li>" + evdate + "</li>" +
+									"<li>" + evinfo + "</li>" +
+									"<li>" + attend + "</li>" +
+									"<li>" + details + "</li>" + "</ul>"
+									)
+								).append($("<a>")
+								.attr({
+									"href": "#",
+									"id": "edit",
+									"key": birthday.id})
+								.html("Edit Date").on("click", editItem)
+								).append("<br>")
+								.append($("<a>").attr({
+									"href": "#",
+									"id": "delete",
+									"key": birthday.id})
+								.html('Delete Date').on('click', deleteItem)
+								)							
+							);		
+				})
 			}
-		});	
-	});
-	
+		});
+	});	
+		
 	//Function to browse Meeting CouchDB dummy data
 	$("#meeButton").on("click", function() {
 		$.mobile.changePage($("#dispData"));
@@ -192,17 +237,32 @@ $("#couchLinks").on("pageinit", function() {
 							attend = meeting.value.attend;
 							details = meeting.value.details;
 									
-							$("<ul id='myDisp' data-role='listview'>" + 
-								"<li>" + events + "</li>" +
-								"<li>" + evdate + "</li>" +
-								"<li>" + evinfo + "</li>" +
-								"<li>" + attend + "</li>" +
-								"<li>" + details + "</li>" +
-								"</ul>").appendTo("#dispData");
-				});
+							$("#dispData").append(
+								$("<ul data-role='listview' id='myDisp'>").append(
+									$("<li>" + events + "</li>" +
+									"<li>" + evdate + "</li>" +
+									"<li>" + evinfo + "</li>" +
+									"<li>" + attend + "</li>" +
+									"<li>" + details + "</li>" + "</ul>"
+									)
+								).append($("<a>")
+								.attr({
+									"href": "#",
+									"id": "edit",
+									"key": meeting.id})
+								.html("Edit Date").on("click", editItem)
+								).append("<br>")
+								.append($("<a>").attr({
+									"href": "#",
+									"id": "delete",
+									"key": meeting.id})
+								.html('Delete Date').on('click', deleteItem)
+								)							
+							);		
+				})
 			}
-		});	
-	});
+		});
+	});	
 	
 	//Function to browse Other CouchDB dummy data
 	$("#othButton").on("click", function() {
@@ -218,18 +278,33 @@ $("#couchLinks").on("pageinit", function() {
 							attend = other.value.attend;
 							details = other.value.details;
 									
-							$("<ul id='myDisp' data-role='listview'>" + 
-								"<li>" + events + "</li>" +
-								"<li>" + evdate + "</li>" +
-								"<li>" + evinfo + "</li>" +
-								"<li>" + attend + "</li>" +
-								"<li>" + details + "</li>" +
-								"</ul>").appendTo("#dispData");
-				});
+							$("#dispData").append(
+								$("<ul data-role='listview' id='myDisp'>").append(
+									$("<li>" + events + "</li>" +
+									"<li>" + evdate + "</li>" +
+									"<li>" + evinfo + "</li>" +
+									"<li>" + attend + "</li>" +
+									"<li>" + details + "</li>" + "</ul>"
+									)
+								).append($("<a>")
+								.attr({
+									"href": "#",
+									"id": "edit",
+									"key": other.id})
+								.html("Edit Date").on("click", editItem)
+								).append("<br>")
+								.append($("<a>").attr({
+									"href": "#",
+									"id": "delete",
+									"key": other.id})
+								.html('Delete Date').on('click', deleteItem)
+								)							
+							);		
+				})
 			}
-		});	
-	});
-	
+		});
+	});	
+		
 	//Function to browse All CouchDB dummy data
 	$("#allButton").on("click", function() {
 		$.mobile.changePage($("#dispData"));
@@ -237,33 +312,40 @@ $("#couchLinks").on("pageinit", function() {
 		$.couch.db("project4").view("Save-a-date/all", {
 			success: function(data) {
 				alert("Here's All Couch!");
-				//var id = $.each(data.rows, function(index, all){all.value.id;});
 					$.each(data.rows, function(index, all){
-						var key = all.value.key;
+						var key = all.value._id;
 							events = all.value.events;
 							evdate = all.value.evdate;
 							evinfo = all.value.evinfo;
 							attend = all.value.attend;
 							details = all.value.details;
 							
-							console.log(key);
-									
-							$("<ul id='myDisp' data-role='listview'>" + 
-								//"<ul id='icon'>" + "</ul>" +
-								"<li>" + events + "</li>" +
-								"<li>" + evdate + "</li>" +
-								"<li>" + evinfo + "</li>" +
-								"<li>" + attend + "</li>" +
-								"<li>" + details + "</li>" +
-								"<ul id='links'>" + "</ul>" +
-								"</ul>").appendTo("#dispData");	
-								return key;		
-				});
-				//console.log(key);
-				makeItemLinks("key", links);
+							$("#dispData").append(
+								$("<ul data-role='listview' id='myDisp'>").append(
+									$("<li>" + events + "</li>" +
+									"<li>" + evdate + "</li>" +
+									"<li>" + evinfo + "</li>" +
+									"<li>" + attend + "</li>" +
+									"<li>" + details + "</li>" + "</ul>"
+									)
+								).append($("<a>")
+								.attr({
+									"href": "#",
+									"id": "edit",
+									"key": all.id})
+								.html("Edit Date").on("click", editItem)
+								).append("<br>")
+								.append($("<a>").attr({
+									"href": "#",
+									"id": "delete",
+									"key": all.id})
+								.html('Delete Date').on('click', deleteItem)
+								)							
+							);		
+				})
 			}
-		});	
-	});
+		});
+	});	
 }); //End of couchLinks pageinit
 
 $("#error404").on("pageinit", function() {
@@ -411,7 +493,8 @@ function makeItemLinks(key, links) {
     var deleteLink = $("<a></a>").attr({"href": "#", "id": "deleteLink", "key": key })
     							 .html("Delete Date")
     							 .appendTo(links)
-    							 .on("click", deleteItem);    
+    							 .on("click", deleteItem);
+    				return false;
 };
 
 //Function for edit item link
