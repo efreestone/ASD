@@ -103,6 +103,7 @@ $("#couchLinks").on("pageinit", function() {
 	//Function to browse Anniversary CouchDB dummy data
 	$("#annButton").on("click", function() {
 		$.mobile.changePage($("#dispData"));
+		$("#couchDisp").empty();
 		
 		$.couch.db("project4").view("Save-a-date/anniversary", {
 			success: function(data) {
@@ -114,7 +115,7 @@ $("#couchLinks").on("pageinit", function() {
 							attend = anniversary.value.attend;
 							details = anniversary.value.details;
 									
-							$("#dispData").append(
+							$("#couchDisp").append(
 								$("<ul data-role='listview' id='myDisp'>").append(
 									$("<li>" + events + "</li>" +
 									"<li>" + evdate + "</li>" +
@@ -144,6 +145,7 @@ $("#couchLinks").on("pageinit", function() {
 	//Function to browse Appointment CouchDB dummy data
 	$("#appButton").on("click", function() {
 		$.mobile.changePage($("#dispData"));
+		$("#couchDisp").empty();
 		
 		$.couch.db("project4").view("Save-a-date/appointment", {
 			success: function(data) {
@@ -185,6 +187,7 @@ $("#couchLinks").on("pageinit", function() {
 	//Function to browse Birthday CouchDB dummy data
 	$("#birButton").on("click", function() {
 		$.mobile.changePage($("#dispData"));
+		$("#couchDisp").empty();
 		
 		$.couch.db("project4").view("Save-a-date/birthday", {
 			success: function(data) {
@@ -226,6 +229,7 @@ $("#couchLinks").on("pageinit", function() {
 	//Function to browse Meeting CouchDB dummy data
 	$("#meeButton").on("click", function() {
 		$.mobile.changePage($("#dispData"));
+		$("#couchDisp").empty();
 		
 		$.couch.db("project4").view("Save-a-date/meeting", {
 			success: function(data) {
@@ -267,6 +271,7 @@ $("#couchLinks").on("pageinit", function() {
 	//Function to browse Other CouchDB dummy data
 	$("#othButton").on("click", function() {
 		$.mobile.changePage($("#dispData"));
+		$("#couchDisp").empty();
 		
 		$.couch.db("project4").view("Save-a-date/other", {
 			success: function(data) {
@@ -308,6 +313,7 @@ $("#couchLinks").on("pageinit", function() {
 	//Function to browse All CouchDB dummy data
 	$("#allButton").on("click", function() {
 		$.mobile.changePage($("#dispData"));
+		$("#couchDisp").empty();
 		
 		$.couch.db("project4").view("Save-a-date/all", {
 			success: function(data) {
@@ -481,7 +487,7 @@ function getImage(catName, makeSubList) {
 };
 
 //Create the edit and delete links for each stored item when displayed
-function makeItemLinks(key, links) {
+/*function makeItemLinks(key, links) {
 	var editLink = $("<a></a>").attr({"href": "#", "id": "editLink", "key": key })
 							   .html("Edit Date")
 							   .appendTo(links)
@@ -495,29 +501,31 @@ function makeItemLinks(key, links) {
     							 .appendTo(links)
     							 .on("click", deleteItem);
     				return false;
-};
+};*/
 
 //Function for edit item link
 function editItem() {
 	$.mobile.changePage($("#addItem"));
-	//Grab the data from our item from local storage
-	var value = localStorage.getItem($(this).attr("key"));
-	var item = $.parseJSON(value);    
 	
+	//Grab the data from our item from local storage
+	$.couch.db("project4").openDoc($(this).attr("key"), {
+    		success: function(data) {   
 	//Populate the form fields with current localStorage values.
 	//[0] is the label. [1] is the value.
-	$("#eventType").val(item.events[1]);
-	$("#evDate").val(item.evdate[1]);
-	$("#evInfo").val(item.evinfo[1]);
-		if(item.attend[1] == "Yes") {
-			$("#attend").prop(":checked", true);
-		}
-	$("#details").val(item.details[1]);
+		$("#eventType").val(data.events[1]);
+		$("#evDate").val(data.evdate[1]);
+		$("#evInfo").val(data.evinfo[1]);
+			if(data.attend[1] == "Yes") {
+				$("#attend").prop(":checked", true);
+			}
+		$("#details").val(data.details[1]);
 	//Change text on save button
-	$('#submit').val("Edit Date");
-	$('#submit').attr("key", $(this).attr("key")); 
+		$('#submit').val("Edit Date");
+		$('#submit').attr({"key": data._id, "rev": data._rev});
+		}
+	}); 
 };
-    
+
 //Delete single event 
 function deleteItem() {
 	
@@ -525,20 +533,24 @@ function deleteItem() {
 	
     var ask = confirm("Are you sure you want to delete this date?");
     if(ask) {
-    	localStorage.removeItem($(this).attr("key"));
-    	alert("You have successfully deleted the date!");
-    	
-    	//history.go(0);
-    	//showData();
-    	//$.mobile.changePage($("#dispData"));
-    	//window.opener.updateContent();
-    	//showData();
-	    //localStorage.removeItem(this.key);
-	    //alert("You have successfully deleted the date!")
-	    window.location.reload();
+    	$.couch.db("project4").openDoc($(this).attr("key"), {
+    		success: function(data) {
+	    		var item = {};
+	    		item._id = data._id;
+	    		item._rev = data._rev;
+	    		$.couch.db("project4").removeDoc(item, {	
+		    		success: function(data) {
+			    		alert("You have successfully deleted the date!");
+	    			}
+	    		});
+	    	}
+    	});
+	    
 	    //return false;
 	    
     }else{
 	    alert("Date was NOT deleted.")
     }
+    $.mobile.changePage("#couchLinks");
+    //window.location.reload();
 };
