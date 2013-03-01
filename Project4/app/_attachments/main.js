@@ -117,11 +117,11 @@ $("#couchLinks").on("pageinit", function() {
 									
 							$("#couchDisp").append(
 								$("<ul data-role='listview' id='myDisp'>").append(
-									$("<li>" + events + "</li>" +
-									"<li>" + evdate + "</li>" +
-									"<li>" + evinfo + "</li>" +
-									"<li>" + attend + "</li>" +
-									"<li>" + details + "</li>" + "</ul>"
+									$("<li>" + "Event Type: " + events + "</li>" +
+									"<li>" + "Date: " + evdate + "</li>" +
+									"<li>" + "Info: " + evinfo + "</li>" +
+									"<li>" + "Is attendance required?: " + attend + "</li>" +
+									"<li>" + "Event Details: " + details + "</li>" + "</ul>"
 									)
 								).append($("<a>")
 								.attr({
@@ -159,11 +159,11 @@ $("#couchLinks").on("pageinit", function() {
 									
 							$("#couchDisp").append(
 								$("<ul data-role='listview' id='myDisp'>").append(
-									$("<li>" + events + "</li>" +
-									"<li>" + evdate + "</li>" +
-									"<li>" + evinfo + "</li>" +
-									"<li>" + attend + "</li>" +
-									"<li>" + details + "</li>" + "</ul>"
+									$("<li>" + "Event Type: " + events + "</li>" +
+									"<li>" + "Date: " + evdate + "</li>" +
+									"<li>" + "Info: " + evinfo + "</li>" +
+									"<li>" + "Is attendance required?: " + attend + "</li>" +
+									"<li>" + "Event Details: " + details + "</li>" + "</ul>"
 									)
 								).append($("<a>")
 								.attr({
@@ -201,11 +201,11 @@ $("#couchLinks").on("pageinit", function() {
 									
 							$("#couchDisp").append(
 								$("<ul data-role='listview' id='myDisp'>").append(
-									$("<li>" + events + "</li>" +
-									"<li>" + evdate + "</li>" +
-									"<li>" + evinfo + "</li>" +
-									"<li>" + attend + "</li>" +
-									"<li>" + details + "</li>" + "</ul>"
+									$("<li>" + "Event Type: " + events + "</li>" +
+									"<li>" + "Date: " + evdate + "</li>" +
+									"<li>" + "Info: " + evinfo + "</li>" +
+									"<li>" + "Is attendance required?: " + attend + "</li>" +
+									"<li>" + "Event Details: " + details + "</li>" + "</ul>"
 									)
 								).append($("<a>")
 								.attr({
@@ -243,11 +243,11 @@ $("#couchLinks").on("pageinit", function() {
 									
 							$("#couchDisp").append(
 								$("<ul data-role='listview' id='myDisp'>").append(
-									$("<li>" + events + "</li>" +
-									"<li>" + evdate + "</li>" +
-									"<li>" + evinfo + "</li>" +
-									"<li>" + attend + "</li>" +
-									"<li>" + details + "</li>" + "</ul>"
+									$("<li>" + "Event Type: " + events + "</li>" +
+									"<li>" + "Date: " + evdate + "</li>" +
+									"<li>" + "Info: " + evinfo + "</li>" +
+									"<li>" + "Is attendance required?: " + attend + "</li>" +
+									"<li>" + "Event Details: " + details + "</li>" + "</ul>"
 									)
 								).append($("<a>")
 								.attr({
@@ -285,11 +285,11 @@ $("#couchLinks").on("pageinit", function() {
 									
 							$("#couchDisp").append(
 								$("<ul data-role='listview' id='myDisp'>").append(
-									$("<li>" + events + "</li>" +
-									"<li>" + evdate + "</li>" +
-									"<li>" + evinfo + "</li>" +
-									"<li>" + attend + "</li>" +
-									"<li>" + details + "</li>" + "</ul>"
+									$("<li>" + "Event Type: " + events + "</li>" +
+									"<li>" + "Date: " + evdate + "</li>" +
+									"<li>" + "Info: " + evinfo + "</li>" +
+									"<li>" + "Is attendance required?: " + attend + "</li>" +
+									"<li>" + "Event Details: " + details + "</li>" + "</ul>"
 									)
 								).append($("<a>")
 								.attr({
@@ -328,11 +328,11 @@ $("#couchLinks").on("pageinit", function() {
 							
 							$("#couchDisp").append(
 								$("<ul data-role='listview' id='myDisp'>").append(
-									$("<li>" + events + "</li>" +
-									"<li>" + evdate + "</li>" +
-									"<li>" + evinfo + "</li>" +
-									"<li>" + attend + "</li>" +
-									"<li>" + details + "</li>" + "</ul>"
+									$("<li>" + "Event Type: " + events + "</li>" +
+									"<li>" + "Date: " + evdate + "</li>" +
+									"<li>" + "Info: " + evinfo + "</li>" +
+									"<li>" + "Is attendance required?: " + attend + "</li>" +
+									"<li>" + "Event Details: " + details + "</li>" + "</ul>"
 									)
 								).append($("<a>")
 								.attr({
@@ -408,11 +408,11 @@ function saveData(key) {
     $("#submit").attr("key", id);
     
     	item._id	 = id;
-        item.events  = ["Event Type: ", $("#events").val()]; //Event type selector
-        item.evdate  = ["Date: ", $("#evdate").val()]; //Event Date
-        item.evinfo  = ["Info: ", $("#evinfo").val()]; //Event Info
-        item.attend  = ["Is attendance required?: ", attendReq]; //Attendance Checkbox
-        item.details = ["Event Details: ", $("#details").val()]; //Event Details
+        item.events  = [$("#events").val()]; //Event type selector
+        item.evdate  = [$("#evdate").val()]; //Event Date
+        item.evinfo  = [$("#evinfo").val()]; //Event Info
+        item.attend  = [attendReq]; //Attendance Checkbox
+        item.details = [$("#details").val()]; //Event Details
             
     //Save Data into Local Storage: Use Stringify to convert object to a string.
     $.couch.db("project4").saveDoc(item, {
@@ -441,11 +441,11 @@ $("#clearData").on("click", function() {
 
 //Event listener for "See Saved Dates" button on index
 $("#seeData").on("click", function() {
-	showData();
+	$.mobile.changePage($("#couchLinks"));
 });
 //Event listener for "Display Data" button on addItem
 $("#displayData").on("click", function() {
-	showData();
+	$.mobile.changePage($("#couchLinks"));
 });
 //Event listener for "Add New Date" button on dispData
 $("#addNew").on("click", function() {
@@ -521,13 +521,13 @@ function editItem() {
     		success: function(data) {   
 	//Populate the form fields with current localStorage values.
 	//[0] is the label. [1] is the value.
-		$("#events").val(data.events[1]);
-		$("#evdate").val(data.evdate[1]);
-		$("#evinfo").val(data.evinfo[1]);
-			if(data.attend[1] == "Yes") {
+		$("#events").val(data.events[0]);
+		$("#evdate").val(data.evdate[0]);
+		$("#evinfo").val(data.evinfo[0]);
+			if(data.attend[0] == "Yes") {
 				$("#attend").prop(":checked", true);
 			}
-		$("#details").val(data.details[1]);
+		$("#details").val(data.details[0]);
 	//Change text on save button
 		$("#submit").val("Edit Date")
 			.attr({"key": data._id, "rev": data._rev
