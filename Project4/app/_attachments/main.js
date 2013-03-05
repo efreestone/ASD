@@ -379,7 +379,7 @@ $("submit").on("click", function() {
 
 //Function to grab the value of attend checkbox
 function attendCheck() {
-	if($("#attend").is(":checked")){
+	if($("#attend").is(":checked")) {
 		attendReq = $("#attend").val();
 		//$("#attend").attr("checked", true);
 	}else{
@@ -390,7 +390,7 @@ function attendCheck() {
 
 //Function to add key and save data to local storage
 function saveData(key) {
-	var item         = {};
+	var data         = {};
 	//If there is no key, this means this is a brand new item and we need a new key.
 	if(!key || undefined) {
 		var id = $("#events").val() + ":" + Math.floor(Math.random()*100000001);
@@ -399,7 +399,7 @@ function saveData(key) {
 		//The key is the same key that has been passed along form the editSubmit handler
 		//to the validate function, and then passed here, into the storeData finction.
 		id = key;
-		item._rev = $("#submit").attr("rev");
+		data._rev = $("#submit").attr("rev");
 	}
     //Gather up all our form field values and store in an object.
     //Object properties contain array with the form label and input value.
@@ -407,15 +407,15 @@ function saveData(key) {
     //console.log(attendReq);
     $("#submit").attr("key", id);
     
-    	item._id	 = id;
-        item.events  = [$("#events").val()]; //Event type selector
-        item.evdate  = [$("#evdate").val()]; //Event Date
-        item.evinfo  = [$("#evinfo").val()]; //Event Info
-        item.attend  = [attendReq]; //Attendance Checkbox
-        item.details = [$("#details").val()]; //Event Details
+    	data._id	 = id;
+        data.events  = [$("#events").val()]; //Event type selector
+        data.evdate  = [$("#evdate").val()]; //Event Date
+        data.evinfo  = [$("#evinfo").val()]; //Event Info
+        data.attend  = [attendReq]; //Attendance Checkbox
+        data.details = [$("#details").val()]; //Event Details
             
     //Save Data into Local Storage: Use Stringify to convert object to a string.
-    $.couch.db("project4").saveDoc(item, {
+    $.couch.db("project4").saveDoc(data, {
     	success: function(data) {    
     alert("Date Saved!");
     //console.log(id);
@@ -424,6 +424,7 @@ function saveData(key) {
     });
     $("#submit").removeAttr("key");
     //window.location.reload();
+    return data;
 };
 
 //Clear all stored data
@@ -517,16 +518,19 @@ function editItem() {
 	
 	
 	//Grab the data from our item from local storage
-	$.couch.db('project4').openDoc($(this).attr('key'), {
+	$.couch.db("project4").openDoc($(this).attr("key"), {
     		success: function(data) {   
 	//Populate the form fields with current localStorage values.
 	//[0] is the label. [1] is the value.
 		$("#events").val(data.events[0]);
+			$("#events").selectmenu("refresh"); //update drop-down to show event type
 		$("#evdate").val(data.evdate[0]);
 		$("#evinfo").val(data.evinfo[0]);
 			if(data.attend[0] == "Yes") {
-				$("#attend").prop(":checked", true);
+				$("#attend").prop("checked", true);
+				$("#attend").checkboxradio("refresh"); //show if checked is selected
 			}
+			//console.log(data.attend[0]);
 		$("#details").val(data.details[0]);
 	//Change text on save button
 		$("#submit").val("Edit Date")
